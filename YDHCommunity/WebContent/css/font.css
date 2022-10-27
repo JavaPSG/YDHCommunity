@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "C24S";
+  src: url("font/Cafe24Ssurround.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "C24SA";
+  src: url("font/Cafe24SsurroundAir.ttf") format("truetype");
+  font-weight: normal;
+}

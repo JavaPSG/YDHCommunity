@@ -1,35 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¾çµð°í Ä¿¹Â´ÏÆ¼</title>
+<meta charset="UTF-8">
+<title>ì–‘ë””ê³  ì»¤ë®¤ë‹ˆí‹°</title>
 <link rel="stylesheet" href="css/font.css" />
 <link rel="stylesheet" href="css/style.css" />
 <link rel="stylesheet" href="css/menu.css" />
-</head>
+</head> 
 <body class="is-preload">
 	<div id="wrapper">
 		<header id="header" class="alt">
 			<h1>
-				<a href="index.jsp">¾çµð°í Ä¿¹Â´ÏÆ¼</a>
+				<a href="index.jsp">ì–‘ë””ê³  ì»¤ë®¤ë‹ˆí‹°</a>
 			</h1>
-			<nav id="nav">
-				<ul>
-					<li class="special"><a href="#menu" class="menuToggle"><span>¸Þ´º</span></a>
-						<div id="behind"></div>
-							<div id="menu">
-								<ul>
-									<li><a href="#">È¨</a></li>
-									<li><a href="#">·Î±×ÀÎ</a></li>
-									<li><a href="#">È¸¿ø°¡ÀÔ</a></li>
-									<li><a href="#">·Î±×¾Æ¿ô</a></li>
-								</ul>
-							</div>
-						</li>
-				</ul>
-			</nav>
+			<%@ include file="menu.jsp" %>
 		</header>
 	</div>
 	<script src="js/main.js"></script>

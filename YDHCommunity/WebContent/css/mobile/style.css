@@ -1,0 +1,15 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 105%;
+	font-family: "C24SA", serif;
+	text-decoration: none;
+	vertical-align: baseline;
+	color: #f7f7f7;
+	list-style: none;
+}
+
+body {
+	background: #212121;
+}

@@ -1,10 +1,17 @@
 @font-face {
-  font-family: "C24S";
-  src: url("font/Cafe24Ssurround.ttf") format("truetype");
+  font-family: "JUA";
+  src: url("fonts/Jua-Regular.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
-  font-family: "C24SA";
-  src: url("font/Cafe24SsurroundAir.ttf") format("truetype");
-  font-weight: normal;
+  font-family: "GMSR";
+  src: url("fonts/MaterialSymbolsRounded.ttf") format('truetype');
+}
+
+#icon {
+	font-family: "GMSR";
+	font-weight: normal;
+	font-size: 1.5em;
+	vertical-align: middle;
+	height: 10px;
 }

@@ -9,9 +9,9 @@
 }
 
 #icon {
+	fill: 1;
 	font-family: "GMSR";
-	font-weight: normal;
-	font-size: 1.5em;
+	font-weight: 700;
+	font-size: 1.4em;
 	vertical-align: middle;
-	height: 10px;
 }

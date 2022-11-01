@@ -1,13 +1,21 @@
 (function($) {
 
-	const $window = $(window), $body = $('body'), $banner = $('#banner'), $header = $('#header');
+	var $window = $(window), $body = $('body'), $banner = $('#banner'), $header = $('#header');
 
 	$window.on('load', function() {
 		window.setTimeout(function() {
 			$body.removeClass('is-preload');
 		}, 100);
 	});
-
+	
+	breakpoints({
+		xlarge : [ '1281px', '1680px' ],
+		large : [ '981px', '1280px' ],
+		medium : [ '737px', '980px' ],
+		small : [ '481px', '736px' ],
+		xsmall : [ null, '480px' ]
+	});
+	
 	if (browser.mobile)
 		$body.addClass('is-mobile');
 	else {
@@ -24,18 +32,10 @@
 		offset : $header.outerHeight()
 	});
 
-	$('#menu').append('<a href="#menu" class="close"></a>').appendTo($body)
-			.panel({
-				delay : 500,
-				hideOnClick : true,
-				hideOnSwipe : true,
-				resetScroll : true,
-				resetForms : true,
-				side : 'right',
-				target : $body,
-				visibleClass : 'is-menu-visible'
-			});
-	
+	$("#menuToggle").click(function(e) {
+		console.log("1")
+	});
+
 	if ($banner.length > 0 && $header.hasClass('alt')) {
 
 		$window.on('resize', function() {

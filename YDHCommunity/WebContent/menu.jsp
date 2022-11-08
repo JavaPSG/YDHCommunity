@@ -16,4 +16,3 @@
 		</div>
 	</ul>
 </nav>
-<div id="behind"></div>

@@ -31,9 +31,10 @@
 		speed : 1500,
 		offset : $header.outerHeight()
 	});
-
+ 
 	$("#menuToggle").click(function(e) {
-		console.log("1")
+		$("#menu").toggleClass("toggle");
+		$("#blur").toggleClass("toggle"); 
 	});
 
 	if ($banner.length > 0 && $header.hasClass('alt')) {

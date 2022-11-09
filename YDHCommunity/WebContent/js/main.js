@@ -3,9 +3,14 @@
 	var $window = $(window), $body = $('body'), $banner = $('#banner'), $header = $('#header');
 
 	$window.on('load', function() {
+		$("#loading").removeClass("pre");
 		window.setTimeout(function() {
-			$body.removeClass('is-preload');
-		}, 100);
+			$("#loading").addClass("task");
+		}, 500);
+		window.setTimeout(function() {
+			$("#loading").removeClass("task");
+			$("#loading").addClass("end");
+		}, 900); 
 	});
 	
 	breakpoints({

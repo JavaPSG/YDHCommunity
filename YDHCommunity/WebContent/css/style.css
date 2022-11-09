@@ -11,9 +11,102 @@
 
 body {
 	background: #212121;
+	z-index: 29;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	transform: translateZ(0);
+	will-change: transform;
+	backface-visibility: hidden;
+	transition: all 0.5s ease-in-out;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+}
+
+#loading {
+	z-index: 100;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	transform: translateZ(0);
+	will-change: transform;
+	backface-visibility: hidden;
+	transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	background-color: rgba(0, 0, 0, 1);
+	opacity: 1;
+}
+
+#loading.task {
+	opacity: 0;
+}
+
+#loading.end {
+	z-index: 0;
+}
+
+#loading h2 {
+	-moz-transform: scale(1);
+	-webkit-transform: scale(1);
+	-ms-transform: scale(1);
+	transform: scale(1);
+	-moz-transition: -moz-transform 0.2s ease, opacity 0.2s ease;
+	-webkit-transition: -webkit-transform 0.2s ease, opacity 0.2s ease;
+	-ms-transition: -ms-transform 0.2s ease, opacity 0.2s ease;
+	transition: transform 0.2s ease, opacity 0.2s ease;
+	display: inline-block;
+	font-size: 1.75em;
+	opacity: 1;
+	padding: 0.35em 1em;
+	position: relative;
+	z-index: 1;
+}
+
+#loading h2:before, #loading h2:after {
+	-moz-transition: width 0.55s ease;
+	-webkit-transition: width 0.55s ease;
+	-ms-transition: width 0.55s ease;
+	transition: width 0.55s ease;
+	-moz-transition-delay: 0.25s;
+	-webkit-transition-delay: 0.25s;
+	-ms-transition-delay: 0.25s;
+	transition-delay: 0.25s;
+	background: #fff;
+	content: '';
+	display: block;
+	height: 2px;
+	position: absolute;
+	width: 100%;
+}
+
+#loading h2:before {
+	top: 0;
+	left: 0;
+}
+
+#loading h2:after {
+	bottom: 0;
+	right: 0;
+}
+
+#loading.pre h2 {
+	-moz-transform: scale(0.95);
+	-webkit-transform: scale(0.95);
+	-ms-transform: scale(0.95);
+	transform: scale(0.95);
+	opacity: 0;
+}
+
+#loading.pre h2:before, #loading.pre h2:after {
+	width: 0;
 }
 
 #wrapper {
+	z-index: 100;
+	position: fixed;
 	width: 100%;
 	height: 100%;
 }

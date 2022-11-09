@@ -20,8 +20,7 @@
 
 #header nav>ul>li>a {
 	border: 0;
-	font-size: 0.9em;
-	letter-spacing: 0.225em;
+	font-size: 0.9em; 
 	padding: 0 1.5em;
 	text-transform: uppercase;
 }
@@ -50,11 +49,15 @@
 	height: 100%;
 }
 
-#menu ul {
+#menu ul { 
 	background-color: gray;
-	height: 100%;
 	padding-left: 1em;
-	padding-top: 0.6em;
+	padding-top: 1em;
+	padding-bottom: 1em; 
+	border-bottom-left-radius: 15px;
+}
+#menu ul>li>a>span { 
+	font-size: 1 em; 
 }
 
 #content {

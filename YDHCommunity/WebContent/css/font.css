@@ -1,17 +1,25 @@
 @font-face {
-  font-family: "JUA";
-  src: url("fonts/Jua-Regular.ttf") format("truetype");
-  font-weight: normal;
+	font-family: "JUA";
+	src: url("fonts/Jua-Regular.ttf") format("truetype");
+	font-weight: normal;
 }
+
 @font-face {
-  font-family: "GMSR";
-  src: url("fonts/MaterialSymbolsRounded.ttf") format('truetype');
+	font-family: "GMSR";
+	src: url("fonts/MaterialSymbolsRounded.ttf") format('truetype');
 }
 
 #icon {
 	fill: 1;
 	font-family: "GMSR";
 	font-weight: 700;
-	font-size: 1.4em; 
+	font-size: 1.4em;
+	vertical-align: top;
+}
+
+#menu-icon {
+	fill: 1;
+	font-family: "GMSR";
+	font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' -25, 'opsz' 24;
 	vertical-align: top;
 }

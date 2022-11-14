@@ -5,11 +5,15 @@
 	font-size: 105%;
 	font-family: "JUA";
 	text-decoration: none;
-	color: #f7f7f7;
 	list-style: none;
 }
+body.white-theme {
+	color: #1a1a1a;
+}
+
 
 body {
+	color: #f7f7f7;
 	background: #212121;
 	z-index: 29;
 	position: fixed;
@@ -20,7 +24,7 @@ body {
 	backface-visibility: hidden;
 	transition: all 0.5s ease-in-out;
 	-webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out; 
 	-o-transition: all 0.5s ease-in-out;
 }
 
@@ -105,6 +109,7 @@ body {
 }
 
 #wrapper {
+	color: inherit;
 	z-index: 100;
 	position: fixed;
 	width: 100%;

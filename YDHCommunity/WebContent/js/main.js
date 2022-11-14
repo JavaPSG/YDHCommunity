@@ -36,6 +36,15 @@
 		speed : 1500,
 		offset : $header.outerHeight()
 	});
+	
+	$("#change-white-theme").click(function(e) {
+		$body.addClass("white-theme");
+	});
+	
+	$("#change-dark-theme").click(function(e) {
+		$body.removeClass("white-theme");
+	});
+	
  
 	$("#menuToggle").click(function(e) {
 		$("#menu").toggleClass("toggle");

@@ -50,6 +50,11 @@
 		$("#menu").toggleClass("toggle");
 		$("#blur").toggleClass("toggle"); 
 	});
+	 
+	$("#blur").click(function(e) {
+		$("#menu").removeClass("toggle");
+		$("#blur").removeClass("toggle"); 
+	});
 
 	if ($banner.length > 0 && $header.hasClass('alt')) {
 

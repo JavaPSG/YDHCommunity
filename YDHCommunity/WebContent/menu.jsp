@@ -1,3 +1,4 @@
+<%@page import="com.github.javapsg.utils.JDBC"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <nav id="nav">
@@ -16,6 +17,7 @@
 						<li><a href="#"><span id="menu-icon">&#xe174</span> <span>회원가입</span></a></li>
 						<%
 							if (true) {
+							JDBC.getConnection(); 
 						%>
 						<li><a href="#" id="change-white-theme"><span
 								id="menu-icon">&#xe51c</span> <span>테마: 다크</span></a></li>

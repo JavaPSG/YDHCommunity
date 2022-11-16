@@ -1,6 +1,7 @@
-package com.github.javapsg;
+package com.github.javapsg.user;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class User {
 	
@@ -12,7 +13,26 @@ public class User {
 	private boolean isWhiteTheme;
 	
 	private Calendar lastConnectTime;
+	
+	public User(String name, String email, String password, boolean isWhiteTheme, java.sql.Date lastConnectTime) {
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.isWhiteTheme = isWhiteTheme;
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(new Date(lastConnectTime.getTime()));
+	}
 
+	public boolean isWithdraw() {
+		return name.equals("") && password.equals("");
+	}
+	
+	public void withdraw() {
+		name = "";
+		password = "";
+	}
+	
 	public String getName() {
 		return name;
 	}

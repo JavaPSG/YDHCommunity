@@ -13,7 +13,7 @@
 						<li><a href="#"><span id="menu-icon">&#xe241</span> <span>게시글</span></a></li>
 						<li><a href="#"><span id="menu-icon">&#xe7ef</span> <span>사용자
 									목록</span></a></li>
-						<li><a href="#"><span id="menu-icon">&#xea77</span> <span>로그인</span></a></li>
+						<li><a href="/YDHCommuniy/content/login.jsp"><span id="menu-icon">&#xea77</span> <span>로그인</span></a></li>
 						<li><a href="#"><span id="menu-icon">&#xe174</span> <span>회원가입</span></a></li>
 						<%
 							if (true) {

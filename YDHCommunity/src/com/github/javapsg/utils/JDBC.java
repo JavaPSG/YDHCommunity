@@ -14,7 +14,7 @@ public class JDBC {
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@database.cqwvi7bi8mih.ap-northeast-1.rds.amazonaws.com:1521:admin_ys", "database-1", "m31j1gnmd0210n3ef2");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@database-1.cqwvi7bi8mih.ap-northeast-1.rds.amazonaws.com:1521:ORCL", "admin_ys", "m31j1gnmd0210n3ef2");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

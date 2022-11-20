@@ -1,18 +1,24 @@
-package com.github.javapsg.utils;
+package com.github.javapsg.theme;
 
 import javax.servlet.http.Cookie;
+
+import com.github.javapsg.user.UserDataManager;
 
 public class ThemeUtil {
 
 	public static final Theme getTheme(Cookie[] cookies) {
 		if (cookies != null) {
-
-			for (int i = 0; i < cookies.length; i++) {
+			if (UserDataManager.getInstance().getAccountData(cookies) != null) {
+				
+			} else {
+				for (int i = 0; i < cookies.length; i++) {
 				Cookie c = cookies[i];
 				if (c.getName().equalsIgnoreCase("ydhcommunity_theme")) {
 					return toTheme(c.getValue());
 				}
 			}
+			}
+			
 		}
 		return new Theme("change-white-theme", "&#xe51c", "테마: 다크");
 	}
@@ -24,5 +30,4 @@ public class ThemeUtil {
 			return new Theme("change-white-theme", "&#xe51c", "테마: 다크");
 		}
 	}
-
 }

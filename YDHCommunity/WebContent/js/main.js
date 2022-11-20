@@ -36,15 +36,17 @@
 		speed : 1500,
 		offset : $header.outerHeight()
 	});
-	
+	 
 	$("#change-white-theme").click(function(e) {
 		$body.addClass("white-theme");
-		$('#menu .tab ul').load(location.href+' #theme'); 
+		$("#menu").toggleClass("toggle");
+		$("#content").toggleClass("blur"); 
 	});
 	
 	$("#change-dark-theme").click(function(e) {
 		$body.removeClass("white-theme");
-		$('#menu .tab ul').load(location.href+' #theme');
+		$("#menu").toggleClass("toggle");
+		$("#content").toggleClass("blur"); 
 	});
 	 
   

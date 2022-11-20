@@ -13,14 +13,14 @@
 </head>
 <%@ include file="/header.jsp"%>
 <div class="login-box">
-	<form action="/Login" method="post" border="2" align="center">
+	<form action="/YDHCommunity/Login" method="post" border="2" align="center">
 		<tr>
 			<td>이메일</td>
-			<td> <input type="text" name="member_Id"> </td>
+			<td> <input type="text" name="email"> </td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
-			<td><input type="password" name="memberPwd"> </td>
+			<td><input type="password" name="password"> </td>
 		</tr>
 		<tr>
 			<td colspan="2">

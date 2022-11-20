@@ -1,4 +1,4 @@
-package com.github.javapsg.utils;
+package com.github.javapsg.theme;
 
 public class Theme {
 	

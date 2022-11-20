@@ -25,7 +25,7 @@
 		$body.addClass('is-mobile');
 	else {
 		breakpoints.on('>medium', function() {
-			$body.removeClass('is-mobile');
+			$body.removeClass('is-mobile'); 
 		});
 		breakpoints.on('<=medium', function() {
 			$body.addClass('is-mobile');
@@ -39,21 +39,23 @@
 	
 	$("#change-white-theme").click(function(e) {
 		$body.addClass("white-theme");
+		$('#menu .tab ul').load(location.href+' #theme'); 
 	});
 	
 	$("#change-dark-theme").click(function(e) {
 		$body.removeClass("white-theme");
-	});
-	
- 
-	$("#menuToggle").click(function(e) {
-		$("#menu").toggleClass("toggle");
-		$("#blur").toggleClass("toggle"); 
+		$('#menu .tab ul').load(location.href+' #theme');
 	});
 	 
-	$("#blur").click(function(e) {
+  
+	$("#menuToggle").click(function(e) {
+		$("#menu").toggleClass("toggle");
+		$("#content").toggleClass("blur"); 
+	});
+	 
+	$("#content").click(function(e) {
 		$("#menu").removeClass("toggle");
-		$("#blur").removeClass("toggle"); 
+		$("#content").removeClass("blur"); 
 	});
 
 	if ($banner.length > 0 && $header.hasClass('alt')) {

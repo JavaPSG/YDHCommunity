@@ -90,13 +90,6 @@ body.white-theme #menu ul>li>a {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-}
-
-#blur {
-	z-index: 29;
-	position: fixed;
-	width: 100%;
-	height: 100%;
 	transform: translateZ(0);
 	will-change: transform;
 	backface-visibility: hidden;
@@ -106,6 +99,7 @@ body.white-theme #menu ul>li>a {
 	-o-transition: all 0.5s ease-in-out;
 }
 
-#blur.toggle {
-	background-color: rgba(0, 0, 0, 0.5);
+
+#content.blur {
+	filter: blur(3px);
 }

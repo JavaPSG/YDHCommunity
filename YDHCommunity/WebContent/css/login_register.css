@@ -1,0 +1,10 @@
+#content .login-box {
+	width: 10em;
+	height: 10em;
+	position: fixed;
+	border-color: aqua;
+	border-radius: 2px;
+	top: 50%;
+	left: 50%;
+	margin: -100px 0 0 -100px;
+}

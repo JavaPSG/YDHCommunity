@@ -25,10 +25,10 @@ public class JDBCUtil {
 		return conn;
 	}
 
- /***
-  * DB 연결 객체 종료 및 기타 자원 정리
-  * @param conn DB 연결 객체
-  */
+	/***
+	 * DB 연결 객체 종료 및 기타 자원 정리
+	 * @param conn DB 연결 객체
+	 */
 	public static void close(Connection conn, PreparedStatement pstmt) {
 		if (pstmt != null) {
 			try {
@@ -46,10 +46,10 @@ public class JDBCUtil {
 		}
 	}
 
- /***
-  * DB 연결 객체 종료 및 기타 자원 정리
-  * @param conn DB 연결 객체
-  */
+	/***
+	 * DB 연결 객체 종료 및 기타 자원 정리
+	 * @param conn DB 연결 객체
+	 */
 	public static void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
 		if (rs != null) {
 			try {

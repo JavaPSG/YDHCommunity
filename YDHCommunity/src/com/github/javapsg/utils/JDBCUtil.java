@@ -8,6 +8,10 @@ import java.sql.SQLException;
 
 public class JDBCUtil {
 
+	/***
+	 * DB 연결 및 그 객채 반환
+	 * @return DB 연결 객체
+	 */
 	public static Connection getConnection() {
 
 		Connection conn = null;

@@ -21,29 +21,29 @@ import com.github.javapsg.utils.JDBCUtil;
 
 public class UserDataManager {
 
- // 모든 유저 데이터 맵
+	// 모든 유저 데이터 맵
 	private final Map<String, User> userMap = Collections.synchronizedMap(new HashMap<>());
 	// 현재 로그이네 되어있는 유저 UUID와 이메일 맵
  private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
 	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
- // 싱긅톤: 내부 클래스 인스턴스
+	// 싱긅톤: 내부 클래스 인스턴스
 	private static class InnerInstanceClazz {
 		private static final UserDataManager instance = new UserDataManager();
 	}
 
- /***
-  * 싱글톤 패턴을 이용한 여러 위치에서 같은 인스턴스를 사용하기 위한 메소드
-  * @return 아 클래스의 싱글톤 인스턴스
-  */
+	/***
+	 * 싱글톤 패턴을 이용한 여러 위치에서 같은 인스턴스를 사용하기 위한 메소드
+	 * @return 아 클래스의 싱글톤 인스턴스
+	 */
 	public static UserDataManager getInstance() {
 		return InnerInstanceClazz.instance;
 	}
 
- /***
-  * 중복되지 않은 UUID 발급 
-  * @return 랜덤 UUID
-  */
+	/***
+	 * 중복되지 않은 UUID 발급 
+	 * @return 랜덤 UUID
+	 */
 	private UUID createUUID() {
 		UUID uuid = UUID.randomUUID();
 		if (userMap.containsKey(uuid)) {
@@ -53,11 +53,11 @@ public class UserDataManager {
 		}
 	}
 
- /***
-  * 현재 로그인 중인 사용자의 이메일을 값으로 랜덤 UUID를 저장
-  * @param email 사용자의 이메일
-  * @return 발급받은 랜덤 UUID
-  */
+	/***
+	 * 현재 로그인 중인 사용자의 이메일을 값으로 랜덤 UUID를 저장
+	 * @param email 사용자의 이메일
+	 * @return 발급받은 랜덤 UUID
+	 */
 	public UUID login(String email) {
 		UUID uuid = createUUID();
 		accountMap.put(uuid, email);
@@ -65,18 +65,17 @@ public class UserDataManager {
 		return uuid;
 	}
 
- /***
-  * 현재 로그인 중인 사용자 데이터를 제거
-  * @param email 사용자의 이메일
-  */
+	/***
+	 * 현재 로그인 중인 사용자 데이터를 제거
+	 * @param email 사용자의 이메일
+	 */
 	public void logout(UUID uuid) {
 		accountMap.remove(uuid);
 	}
 
-  
- /***
-  * 유저 데이터가 비어있는 경우에 DB로부터 데이터를 받아와서 저장함
-  */
+	/***
+	 * 유저 데이터가 비어있는 경우에 DB로부터 데이터를 받아와서 저장함
+	 */
 	public void init() {
 		if (!userMap.isEmpty()) {
 			return;
@@ -112,11 +111,11 @@ public class UserDataManager {
 		return Arrays.asList(str.split(":")).stream().map(value -> UUID.fromString(value)).collect(Collectors.toList());
 	}
 
- /***
-  * DB와 맵에 유저 데이터를 저장
-  * @param user 사용자
-  * @return SQL 문을 실행한 결과
-  */
+	/***
+	 * DB와 맵에 유저 데이터를 저장
+	 * @param user 사용자
+	 * @return SQL 문을 실행한 결과
+	 */
 	public int insertMember(User user) {
 		int result = 0;
 		Connection conn = null;
@@ -143,11 +142,11 @@ public class UserDataManager {
 		return result;
 	}
 
- /***
-  * DB와 맵에 기존 유저 데이터를 갱신
-  * @param user 사용자
-  * @return SQL 문을 실행한 결과
-  */
+	/***
+	 * DB와 맵에 기존 유저 데이터를 갱신
+	 * @param user 사용자
+	 * @return SQL 문을 실행한 결과
+	 */
 	public int updateMember(User user) {
 		int result = 0;
 		Connection conn = null;
@@ -208,11 +207,11 @@ public class UserDataManager {
 		return accountMap.values();
 	}
  
- /***
-  * 쿠기 배열에서 지정된 쿠키에서 저장했던 랜덤 UUID 조회
-  * @param cookies 쿠키 배열
-  * @return 조회한 UUID의 String 타입
-  */
+	/***
+	 * 쿠기 배열에서 지정된 쿠키에서 저장했던 랜덤 UUID 조회
+	 * @param cookies 쿠키 배열
+	 * @return 조회한 UUID의 String 타입
+	 */
 	public String getAccountData(Cookie[] cookies) {
 		if (cookies != null) {
 			for (int i = 0; i < cookies.length; i++) {
@@ -225,11 +224,11 @@ public class UserDataManager {
 		return null;
 	}
 
- /***
-  * 쿠기 배열에서 지정된 쿠키에서 저장했던 랜덤 UUID으로 이메일을 얻고 그 이메일로 유저 데이터를 조회
-  * @param cookies 쿠키 배열
-  * @return 조회한 유저 데이터
-  */
+	/***
+	 * 쿠기 배열에서 지정된 쿠키에서 저장했던 랜덤 UUID으로 이메일을 얻고 그 이메일로 유저 데이터를 조회
+	 * @param cookies 쿠키 배열
+	 * @return 조회한 유저 데이터
+	 */
 	public User getUser(Cookie[] cookies) {
 		String uuid = getAccountData(cookies);
 		if (uuid != null) {

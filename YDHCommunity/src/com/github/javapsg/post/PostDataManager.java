@@ -1,4 +1,4 @@
-package com.github.javapsg.user;
+package com.github.javapsg.post;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,46 +12,25 @@ import javax.servlet.http.Cookie;
 
 import com.github.javapsg.utils.JDBCUtil;
 
-public class UserDataManager {
+public class PostDataManager {
 
-	private final Map<String, User> userMap = Collections.synchronizedMap(new HashMap<>());
-	private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
+	private final Map<String, Post> postMap = Collections.synchronizedMap(new HashMap<>());
 
 	private static class InnerInstanceClazz {
-		private static final UserDataManager instance = new UserDataManager();
+		private static final PostDataManager instance = new PostDataManager();
 	}
 
-	public static UserDataManager getInstance() {
+	public static PostDataManager getInstance() {
 		return InnerInstanceClazz.instance;
-	}
-
-	private UUID createUUID() {
-		UUID uuid = UUID.randomUUID();
-		if (userMap.containsKey(uuid)) {
-			return createUUID();
-		} else {
-			return uuid;
-		}
-
-	}
-
-	public UUID login(String email) {
-		UUID uuid = createUUID();
-		accountMap.put(uuid, email);
-		return uuid;
-	}
-
-	public void logout(UUID uuid) {
-		accountMap.remove(uuid);
 	}
 
 	public void init() {
 		Connection conn = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		User user = null;
+		Post post = null;
 
-		userMap.clear();
+		postMap.clear();
 
 		try {
 			pstmt = conn.prepareStatement(

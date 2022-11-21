@@ -10,6 +10,8 @@ public class Post {
 	
 	private String content;
 
+	private Set<User> recommanders = Collections.synchronizedMap(new HashMap<>());
+
 	public String getTitle() {
 		return title;
 	}

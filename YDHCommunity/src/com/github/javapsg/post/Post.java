@@ -10,7 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-public class Post {
+import com.github.javapsg.user.User;
+
+public class Post implements Comparable<Post>{
 
 	private UUID uuid;
 
@@ -107,5 +109,20 @@ public class Post {
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
+	
+	@Override
+    public int compareTo(Post post) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		int v1 = Integer.valueOf(format.format(post.getWriteTime().getTime()));
+		int v2 = Integer.valueOf(format.format(writeTime.getTime()));
+		System.out.println(v1);
+		System.out.println(v2);
+        if (v1 < v2){
+            return 1;
+        } else if (v1 > v2) {
+            return -1;
+        }
+        return 0;
+    }
 
 }

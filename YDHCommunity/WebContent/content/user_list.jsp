@@ -11,17 +11,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>양디고 커뮤니티 - 로그인</title>
-<link rel="stylesheet" href="/YDHCommunity/css/font.css" />
+<title>양디고 커뮤니티 - 사용자 목록</title>
 <link rel="stylesheet" href="/YDHCommunity/css/style.css" />
-<link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
+<link rel="stylesheet" href="/YDHCommunity/css/font.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
-<link rel="stylesheet" href="/YDHCommunity/css/login_register.css" />
+<link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
+<link rel="stylesheet" href="/YDHCommunity/css/user_list.css" />
 </head> 
 <%@ include file="/header.jsp"%>
 <div class="user-list-box">
 	<%
-		List<User> list = new ArrayList(manager.getUsers());
+		List<User> list = new ArrayList(userManager.getUsers());
 		Collections.sort(list);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 a h시 mm분", new Locale("ko", "KR"));
 	%>
@@ -31,7 +31,7 @@
 			<th>이메일</th>
 			<th>마지막 접속 시각</th>
 			<th>상태</th>
-		</tr>
+		</tr> 
 		<%
 			if (list != null) {
 				for (User data : list) {
@@ -47,7 +47,7 @@
 			<td><%=data.getEmail()%></td>
 			<td><%=time%></td>
 			<%
-				if (!manager.getOnlines().contains(data.getEmail())) {
+				if (!userManager.getOnlines().contains(data.getEmail())) {
 							out.println("<td>오프라인</td>");
 						} else {
 							out.println("<td>로그인됨</td>");

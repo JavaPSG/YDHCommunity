@@ -1,3 +1,4 @@
+<%@page import="com.github.javapsg.post.PostDataManager"%>
 <%@page import="com.github.javapsg.user.User"%>
 <%@page import="com.github.javapsg.theme.ThemeUtil"%>
 <%@page import="com.github.javapsg.theme.Theme"%>
@@ -6,10 +7,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	UserDataManager manager = UserDataManager.getInstance();
-	manager.init();
+	UserDataManager userManager = UserDataManager.getInstance();
+	PostDataManager postManager = PostDataManager.getInstance();
+	userManager.init();
 	Theme theme = ThemeUtil.getTheme(request.getCookies());
-	System.out.println(theme.getIcon() + "/" + theme.getId() + "/" + theme.getName());
 	String result = theme.getId().split("-")[1];
 %>
 <body class="<%=theme.getThemeClass()%>">
@@ -33,7 +34,7 @@
 											id="menu-icon">&#xe7ef</span> <span>사용자 목록</span></a></li>
 									<%
 										String url = request.getRequestURI();
-										User user = manager.getUser(request.getCookies());
+										User user = userManager.getUser(request.getCookies());
 										if (user == null) {
 									%>
 									<li><a href="/YDHCommunity/content/login.jsp"><span
@@ -43,7 +44,7 @@
 									<%
 										} else {
 									%>
-									<li><a href="/YDHCommunity/Logout"><span
+									<li><a href="/YDHCommunity/Logout?url=<%=url%>"><span
 											id="menu-icon">&#xe174</span> <span>로그아웃</span></a></li>
 									<%
 										}

@@ -8,3 +8,13 @@
 	left: 50%;
 	margin: -100px 0 0 -100px;
 }
+
+body #content .login-box input{
+	color: #1a1a1a;
+	background: #ebe8e8;
+}
+
+body.white-theme #content .login-box input{
+	color: #f7f7f7;
+	background: #212121;
+}

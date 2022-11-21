@@ -33,6 +33,7 @@ public class User implements Comparable<User>{
 		} catch (ParseException e) {
 			calendar.setTime(new Date());
 		}
+		this.lastConnectTime = calendar;
 	}
 
 	public boolean isWithdraw() {

@@ -34,7 +34,7 @@
 	padding-top: 1px;
 	right: -11em;
 	width: 11em;
-	position: fixed; 
+	position: fixed;
 	transform: translateZ(0);
 	will-change: transform;
 	backface-visibility: hidden;
@@ -53,7 +53,7 @@
 	height: 100%;
 }
 
-body.white-theme #menu ul { 
+body.white-theme #menu ul {
 	background-color: #d9d9d9;
 }
 
@@ -79,11 +79,12 @@ body.white-theme #menu ul {
 
 body.white-theme #menu ul>li>a {
 	color: #1a1a1a;
-} 
+}
 
 #menu ul>li>a>span {
 	font-size: 0.8em;
 	font-weight: 300;
+	color: inherit;
 }
 
 #content {
@@ -93,12 +94,14 @@ body.white-theme #menu ul>li>a {
 	transform: translateZ(0);
 	will-change: transform;
 	backface-visibility: hidden;
-	transition: all 0.5s ease-in-out;
-	-webkit-transition: all 0.5s ease-in-out;
-	-moz-transition: all 0.5s ease-in-out;
-	-o-transition: all 0.5s ease-in-out;
+	transition: background-color, color, filter 0.5s ease-in-out;
+	-webkit-transition: background-color, color, filter 0.5s ease-in-out;
+	-moz-transition: background-color, color, filter 0.5s ease-in-out;
+	-o-transition: background-color, color, filter 0.5s ease-in-out;
+	font-size: 0.8em;
+	justify-content: center;
+	display: flex;
 }
-
 
 #content.blur {
 	filter: blur(3px);

@@ -36,7 +36,7 @@ public class LogoutServlet extends HttpServlet {
 		Cookie cookie = new Cookie("ydhcommunity_account", null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		response.sendRedirect("/YDHCommunity/index.jsp");
+		response.sendRedirect(request.getParameter("url"));
 	}
 
 	public String getAccountData(Cookie[] cookies) {

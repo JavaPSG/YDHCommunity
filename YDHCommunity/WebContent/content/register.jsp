@@ -13,7 +13,7 @@
 </head>
 <%@ include file="/header.jsp"%>
 <div class="login-box">
-	<form action="/YDHCommunity/Register" method="post" border="2" align="center">
+	<form action="/YDHCommunity/Register" method="post" border="1" align="center">
 		<tr>
 			<td>닉네임</td>
 			<td> <input type="text" name="name"> </td>

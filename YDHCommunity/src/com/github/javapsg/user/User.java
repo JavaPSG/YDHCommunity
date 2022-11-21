@@ -1,38 +1,42 @@
 package com.github.javapsg.user;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class User {
-	
+
 	private String name;
-	
 	private String email;
 	private String password;
-	
 	private boolean isWhiteTheme;
-	
 	private Calendar lastConnectTime;
+
 	
-	public User(String name, String email, String password, boolean isWhiteTheme, java.sql.Date lastConnectTime) {
+	public User(String name, String email, String password, boolean isWhiteTheme, String lastConnectTime) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.isWhiteTheme = isWhiteTheme;
-		
+
 		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date(lastConnectTime.getTime()));
+		try {
+			calendar.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(lastConnectTime));
+		} catch (ParseException e) {
+			calendar.setTime(new Date());
+		}
 	}
 
 	public boolean isWithdraw() {
 		return name.equals("") && password.equals("");
 	}
-	
+
 	public void withdraw() {
 		name = "";
 		password = "";
 	}
-	
+
 	public String getName() {
 		return name;
 	}

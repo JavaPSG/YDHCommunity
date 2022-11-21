@@ -2,8 +2,7 @@ package com.github.javapsg.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.Collections;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -16,11 +15,10 @@ import javax.servlet.http.HttpSession;
 import com.github.javapsg.user.User;
 import com.github.javapsg.user.UserDataManager;
 
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
-
 @WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	public RegisterServlet() {
 		super();
@@ -34,22 +32,23 @@ public class RegisterServlet extends HttpServlet {
 
 		UserDataManager manager = UserDataManager.getInstance();
 		int result = 0;
-		
+
 		String password = request.getParameter("password");
 		String passwordCheck = request.getParameter("password_check");
-		
+
 		System.out.println(password);
 		System.out.println(passwordCheck);
 
-		
 		if (!password.equals(passwordCheck)) {
 			out.println("<script> alert('비밀번호 확인이 일치하지 않습니다'); history.back(); </script>");
 		} else if (manager.getEmails().contains(request.getParameter("email"))) {
 			out.println("<script> alert('이미 사용된 이메일입니다'); history.back(); </script>");
-		} else if (manager.getUsers().stream().anyMatch(value -> value.getName().equals(request.getParameter("name")))) {
+		} else if (manager.getUsers().stream()
+				.anyMatch(value -> value.getName().equals(request.getParameter("name")))) {
 			out.println("<script> alert('이미 사용된 닉네임입니다'); history.back(); </script>");
 		} else {
-			User user = new User(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"), false, new java.sql.Date(new Date().getTime()));
+			User user = new User(request.getParameter("name"), request.getParameter("email"),
+					request.getParameter("password"), false, format.format(new Date()));
 			result = manager.insertMember(user);
 			if (result > 0) {
 				HttpSession session = request.getSession();
@@ -58,7 +57,8 @@ public class RegisterServlet extends HttpServlet {
 			} else {
 				out.println("<script> alert('회원가입에 실패했습니다'); </script>");
 			}
-			response.sendRedirect("/YDHCommunity/index.jsp");;
+			response.sendRedirect("/YDHCommunity/index.jsp");
+			;
 		}
 	}
 }

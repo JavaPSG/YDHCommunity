@@ -4,7 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -16,6 +21,7 @@ public class UserDataManager {
 
 	private final Map<String, User> userMap = Collections.synchronizedMap(new HashMap<>());
 	private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
+	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	private static class InnerInstanceClazz {
 		private static final UserDataManager instance = new UserDataManager();
@@ -46,12 +52,15 @@ public class UserDataManager {
 	}
 
 	public void init() {
+		if (!userMap.isEmpty()) {
+			return;
+		}
+		userMap.clear();
+		
 		Connection conn = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		User user = null;
-
-		userMap.clear();
 
 		try {
 			pstmt = conn.prepareStatement(
@@ -59,7 +68,7 @@ public class UserDataManager {
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				user = new User(rs.getString("name"), rs.getString("email"), rs.getString("password"),
-						rs.getBoolean("white_theme"), rs.getDate("last_connect_time"));
+						rs.getBoolean("white_theme"), rs.getString("last_connect_time"));
 				userMap.put(rs.getString("email"), user);
 			}
 		} catch (Exception e) {
@@ -84,7 +93,7 @@ public class UserDataManager {
 			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getPassword());
 			pstmt.setInt(4, user.isWhiteTheme() ? 1 : 0);
-			pstmt.setDate(5, new java.sql.Date(new java.util.Date().getTime()));
+			pstmt.setString(5, format.format(new Date()));
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -109,7 +118,7 @@ public class UserDataManager {
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getPassword());
 			pstmt.setInt(3, user.isWhiteTheme() ? 1 : 0);
-			pstmt.setDate(4, new java.sql.Date(new java.util.Date().getTime()));
+			pstmt.setString(4, format.format(new Date()));
 			pstmt.setString(5, user.getEmail());
 			result = pstmt.executeUpdate();
 

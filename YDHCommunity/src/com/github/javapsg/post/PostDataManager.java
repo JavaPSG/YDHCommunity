@@ -4,12 +4,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.Cookie;
 
+import com.github.javapsg.user.User;
+import com.github.javapsg.user.UserDataManager;
 import com.github.javapsg.utils.JDBCUtil;
 
 public class PostDataManager {
@@ -34,12 +40,12 @@ public class PostDataManager {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"select name, email, password, white_theme, last_connect_time from member order by last_connect_time");
+					"select writer, title, content, recommanders, write_time from post order by write_time");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				user = new User(rs.getString("name"), rs.getString("email"), rs.getString("password"),
-						rs.getBoolean("white_theme"), rs.getDate("last_connect_time"));
-				userMap.put(rs.getString("email"), user);
+				post = new Post(rs.getString("writer"), rs.getString("title"), rs.getString("content"),
+						Arrays.asList(rs.getString("recommanders").split(":")), rs.getString("write_time"));
+				postMap.put(rs.getString("writer"), post);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,7 +58,7 @@ public class PostDataManager {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "insert into member(name, email, password, white_theme, last_connect_time) values(?,?,?,?,?)";
+		String sql = "insert into post(writer, title, content, recommanders, write_time) values(?,?,?,?,?)";
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);

@@ -13,7 +13,7 @@
 </head>
 <%@ include file="/header.jsp"%>
 <div class="login-box">
-	<form action="/YDHCommunity/Register" method="post" border="1" align="center">
+	<form action="/YDHCommunity/Register" method="post" border="2" align="center">
 		<tr>
 			<td>닉네임</td>
 			<td> <input type="text" name="name"> </td>
@@ -30,10 +30,10 @@
 			<td>비밀번호 확인</td>
 			<td><input type="password" name="password_check"> </td>
 		</tr>
-		<tr>
+		<tr> 
 			<td colspan="2">
-			<input type="submit" value="가입">&nbsp;&nbsp;
-			<input type="reset" value="취소"></td>
+			<input class="button" type="submit" value="  가입  ">&nbsp;&nbsp;
+			<input class="button" type="reset" value="  취소  "></td>
 		</tr>
 		</table>
 	</form>

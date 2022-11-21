@@ -7,11 +7,36 @@
 	top: 50%;
 	left: 50%;
 	margin: -100px 0 0 -100px;
+	justify-content: center;
+	display: flex;
+	text-align: center;
 }
+
+#content .login-box form {
+	text-align: center;
+	font-size: 1.1em;
+}
+
+body #content .login-box input.button{
+	border-color: #1a1a1a;
+	background: #ebe8e8;
+	font-size: 0.9em;
+}
+
+body.white-theme #content .login-box input.button{
+	border-color: #f7f7f7;
+	background: #212121;
+}
+
 
 body #content .login-box input{
 	color: #1a1a1a;
 	background: #ebe8e8;
+	border-width: 0px;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: lighter;
+	font-size: 0.9em;
 }
 
 body.white-theme #content .login-box input{

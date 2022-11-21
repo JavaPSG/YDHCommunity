@@ -2,24 +2,31 @@ package com.github.javapsg.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
-public class User {
+public class User implements Comparable<User>{
 
 	private String name;
 	private String email;
 	private String password;
-	private boolean isWhiteTheme;
+	private boolean isWhiteTheme = false;
 	private Calendar lastConnectTime;
+	private List<UUID> posts = Collections.synchronizedList(new ArrayList());
 
-	
-	public User(String name, String email, String password, boolean isWhiteTheme, String lastConnectTime) {
+	public User(String name, String email, String password, boolean isWhiteTheme, String lastConnectTime,
+			Collection<UUID> posts) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.isWhiteTheme = isWhiteTheme;
-
+		this.posts.clear();
+		this.posts.addAll(posts);
 		Calendar calendar = Calendar.getInstance();
 		try {
 			calendar.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(lastConnectTime));
@@ -65,8 +72,9 @@ public class User {
 		return isWhiteTheme;
 	}
 
-	public void setWhiteTheme(boolean isWhiteTheme) {
+	public boolean setWhiteTheme(boolean isWhiteTheme) {
 		this.isWhiteTheme = isWhiteTheme;
+		return this.isWhiteTheme;
 	}
 
 	public Calendar getLastConnectTime() {
@@ -76,5 +84,32 @@ public class User {
 	public void setLastConnectTime(Calendar lastConnectTime) {
 		this.lastConnectTime = lastConnectTime;
 	}
+
+	public void addPost(UUID uuid) {
+		posts.add(uuid);
+	}
+
+	public void removePost(UUID uuid) {
+		posts.remove(uuid);
+	}
+
+	public List<UUID> getPosts() {
+		return posts;
+	}
+	
+	@Override
+    public int compareTo(User user) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		int v1 = Integer.valueOf(format.format(user.lastConnectTime.getTime()));
+		int v2 = Integer.valueOf(format.format(lastConnectTime.getTime()));
+		System.out.println(v1);
+		System.out.println(v2);
+        if (v1 < v2){
+            return 1;
+        } else if (v1 > v2) {
+            return -1;
+        }
+        return 0;
+    }
 
 }

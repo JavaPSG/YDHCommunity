@@ -42,7 +42,7 @@ public class LogoutServlet extends HttpServlet {
 	public String getAccountData(Cookie[] cookies) {
 		for (int i = 0; i < cookies.length; i++) {
 			Cookie c = cookies[i];
-			if (c.getName().equalsIgnoreCase("ydhcommunity_login")) {
+			if (c.getName().equalsIgnoreCase("ydhcommunity_account")) {
 				return c.getValue();
 			}
 		}

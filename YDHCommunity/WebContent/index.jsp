@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
 </head>
-<%@ include file="/header.jsp"%>
-<%@ include file="/footer.jsp"%>
+<%@ include file="/header.jsp"%> 
+<%@ include file="/footer.jsp"%> 
 
 		

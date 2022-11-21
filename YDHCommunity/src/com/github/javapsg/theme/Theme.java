@@ -1,17 +1,17 @@
 package com.github.javapsg.theme;
 
 public class Theme {
-	
+
 	private String name;
 	private String icon;
 	private String id;
-	
+
 	public Theme(String id, String icon, String name) {
 		this.id = id;
 		this.icon = icon;
 		this.name = name;
 	}
-	
+
 	public String getThemeClass() {
 		if (!this.id.split("-")[1].equals("white")) {
 			return "white-theme";

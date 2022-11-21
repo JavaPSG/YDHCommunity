@@ -34,7 +34,7 @@ public class ThemeServlet extends HttpServlet {
 			if (accountData != null) {
 				User user = manager.getUser(manager.getEmail(UUID.fromString(accountData)));
 				if (user != null) {
-					user.setWhiteTheme(true);
+					user.setWhiteTheme(false);
 					manager.updateMember(user);
 				}
 			} else {
@@ -46,7 +46,7 @@ public class ThemeServlet extends HttpServlet {
 			if (accountData != null) {
 				User user = manager.getUser(manager.getEmail(UUID.fromString(accountData)));
 				if (user != null) {
-					user.setWhiteTheme(false);
+					user.setWhiteTheme(true);
 					manager.updateMember(user);
 				}
 			} else {
@@ -59,10 +59,12 @@ public class ThemeServlet extends HttpServlet {
 	}
 
 	public String getAccountData(Cookie[] cookies) {
-		for (int i = 0; i < cookies.length; i++) {
-			Cookie c = cookies[i];
-			if (c.getName().equalsIgnoreCase("ydhcommunity_account")) {
-				return c.getValue();
+		if (cookies != null) {
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie c = cookies[i];
+				if (c.getName().equalsIgnoreCase("ydhcommunity_account")) {
+					return c.getValue();
+				}
 			}
 		}
 		return null;

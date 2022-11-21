@@ -36,11 +36,6 @@ public class LoginServlet extends HttpServlet {
 		email = request.getParameter("email");
 		password = request.getParameter("password");
 		user = manager.getUser(email);
-		
-		System.out.println("B " +UserDataManager.getInstance().getUsers().stream().map(value -> value.getPassword()).collect(Collectors.toList()));
-		System.out.println("B " +UserDataManager.getInstance().getEmails());
-		System.out.println(password);
-		System.out.println(user.getPassword());
 
 		if (user == null || !password.equals(user.getPassword())) {
 			out.println("<script> alert('이메일 또는 비밀번호가 틀렸습니다'); history.back(); </script>");

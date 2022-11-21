@@ -8,8 +8,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 public class Post {
+
+	private UUID uuid;
 
 	private String title;
 
@@ -22,6 +25,23 @@ public class Post {
 
 	private Calendar writeTime;
 
+	public Post(String writer, String title, String content, Collection<String> recommanders, String writeTime,
+			UUID uuid) {
+		this.writer = writer;
+		this.title = title;
+		this.content = content;
+		this.recommanders.clear();
+		this.recommanders.addAll(recommanders);
+		Calendar calendar = Calendar.getInstance();
+		try {
+			calendar.setTime(new SimpleDateFormat("yyyyMMddHHmmss").parse(writeTime));
+		} catch (ParseException e) {
+			calendar.setTime(new Date());
+		}
+		this.uuid = uuid;
+	}
+
+	// insertPost 전의 쓰이는 생성자
 	public Post(String writer, String title, String content, Collection<String> recommanders, String writeTime) {
 		this.writer = writer;
 		this.title = title;
@@ -71,7 +91,6 @@ public class Post {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
 
 	public Calendar getWriteTime() {
 		return writeTime;
@@ -79,6 +98,14 @@ public class Post {
 
 	public void setWriteTime(Calendar writeTime) {
 		this.writeTime = writeTime;
+	}
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
 	}
 
 }

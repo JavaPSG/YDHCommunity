@@ -3,6 +3,7 @@ package com.github.javapsg.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -36,8 +37,6 @@ public class RegisterServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String passwordCheck = request.getParameter("password_check");
 
-		System.out.println(password);
-		System.out.println(passwordCheck);
 
 		if (!password.equals(passwordCheck)) {
 			out.println("<script> alert('비밀번호 확인이 일치하지 않습니다'); history.back(); </script>");
@@ -48,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 			out.println("<script> alert('이미 사용된 닉네임입니다'); history.back(); </script>");
 		} else {
 			User user = new User(request.getParameter("name"), request.getParameter("email"),
-					request.getParameter("password"), false, format.format(new Date()));
+					request.getParameter("password"), false, format.format(new Date()), Arrays.asList());
 			result = manager.insertMember(user);
 			if (result > 0) {
 				HttpSession session = request.getSession();

@@ -1,3 +1,4 @@
+<%@page import="com.github.javapsg.user.User"%>
 <%@page import="com.github.javapsg.theme.ThemeUtil"%>
 <%@page import="com.github.javapsg.theme.Theme"%>
 <%@page import="com.github.javapsg.user.UserDataManager"%>
@@ -31,12 +32,9 @@
 									<li><a href="/YDHCommunity/content/user_list.jsp"><span
 											id="menu-icon">&#xe7ef</span> <span>사용자 목록</span></a></li>
 									<%
-										
-										String uuid = manager.getAccountData(request.getCookies());
 										String url = request.getRequestURI();
-										if (uuid == null
-												|| (uuid != null && manager.getEmail(UUID.fromString(uuid)) == null)
-												|| (uuid != null && manager.getUser(manager.getEmail(UUID.fromString(uuid))) == null)) {
+										User user = manager.getUser(request.getCookies());
+										if (user == null) {
 									%>
 									<li><a href="/YDHCommunity/content/login.jsp"><span
 											id="menu-icon">&#xea77</span> <span>로그인</span></a></li>
@@ -45,7 +43,7 @@
 									<%
 										} else {
 									%>
-									<li><a href="/YDHCommunity/logout"><span
+									<li><a href="/YDHCommunity/Logout"><span
 											id="menu-icon">&#xe174</span> <span>로그아웃</span></a></li>
 									<%
 										}

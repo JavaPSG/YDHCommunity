@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/YDHCommunity/css/font.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
-</head>
+</head> 
 <%@ include file="/header.jsp"%> 
 <%@ include file="/footer.jsp"%> 
 

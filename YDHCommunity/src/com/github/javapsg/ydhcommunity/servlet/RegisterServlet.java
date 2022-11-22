@@ -1,4 +1,4 @@
-package com.github.javapsg.servlet;
+package com.github.javapsg.ydhcommunity.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.github.javapsg.user.User;
-import com.github.javapsg.user.UserDataManager;
+import com.github.javapsg.ydhcommunity.user.User;
+import com.github.javapsg.ydhcommunity.user.UserDataManager;
 
 @WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {

@@ -1,11 +1,11 @@
-<%@page import="com.github.javapsg.post.PostDataManager"%>
-<%@page import="com.github.javapsg.user.User"%>
-<%@page import="com.github.javapsg.theme.ThemeUtil"%>
-<%@page import="com.github.javapsg.theme.Theme"%>
-<%@page import="com.github.javapsg.user.UserDataManager"%>
+<%@page import="com.github.javapsg.ydhcommunity.post.PostDataManager"%>
+<%@page import="com.github.javapsg.ydhcommunity.user.User"%>
+<%@page import="com.github.javapsg.ydhcommunity.theme.ThemeUtil"%>
+<%@page import="com.github.javapsg.ydhcommunity.theme.Theme"%>
+<%@page import="com.github.javapsg.ydhcommunity.user.UserDataManager"%>
 <%@page import="java.util.UUID"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%> 
 <%
 	UserDataManager userManager = UserDataManager.getInstance();
 	PostDataManager postManager = PostDataManager.getInstance();
@@ -33,7 +33,7 @@
 									<li><a href="/YDHCommunity/content/user_list.jsp"><span
 											id="menu-icon">&#xe7ef</span> <span>사용자 목록</span></a></li>
 									<%
-										String url = request.getURequestURI();
+										String url = request.getRequestURI();
 										User user = userManager.getUser(request.getCookies());
 										if (user == null) {
 									%>
@@ -50,9 +50,9 @@
 											id="menu-icon">&#xe174</span> <span>로그아웃</span></a></li>
 									<%
 										}
-									%>
+									%> 
 									<li id="theme"><a
-										href="/YDHCommunity/Theme?theme=<%=result%>&url=<%=url%>"
+										href="/YDHCommunity/Theme?theme=<%=result%>&url=<%=url%>&user=<%=(String) request.getParameter("user")%>"
 										id="<%=theme.getId()%>"><span id="menu-icon"><%=theme.getIcon()%></span>
 											<span><%=theme.getName()%></span></a></li>
 								</ul>

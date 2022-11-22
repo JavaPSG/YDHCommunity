@@ -1,4 +1,4 @@
-package com.github.javapsg.utils;
+package com.github.javapsg.ydhcommunity.utils;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

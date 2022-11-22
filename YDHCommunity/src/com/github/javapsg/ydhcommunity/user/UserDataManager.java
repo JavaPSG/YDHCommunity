@@ -1,4 +1,4 @@
-package com.github.javapsg.user;
+package com.github.javapsg.ydhcommunity.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,14 +23,13 @@ import java.util.stream.StreamSupport;
 
 import javax.servlet.http.Cookie;
 
-import com.github.javapsg.utils.JDBCUtil;
+import com.github.javapsg.ydhcommunity.utils.JDBCUtil;
 
 public class UserDataManager {
 
 	// 모든 유저 데이터 맵
 	private final Map<String, User> userMap = Collections.synchronizedMap(new HashMap<>());
 	// 현재 로그이네 되어있는 유저 UUID와 이메일 맵
-	// https://micropilot.tistory.com/257 로 변경
 	private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
 	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
@@ -99,7 +98,7 @@ public class UserDataManager {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"select name, introduce, email, password, white_theme, last_connect_time, posts from member order by last_connect_time");
+					"select name, introduce, email, password, white_theme, last_connect_time, point, posts from member order by last_connect_time");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				user = new User(rs.getString("name"), rs.getString("introduce"), rs.getString("email"),

@@ -8,7 +8,7 @@
 	border-left: 0px;
 	border-top: 0px;
 	border-right: 0px; 
-	border-bottom: solid;
+	border-bottom: outset;
     border-bottom-color: aqua;
 }
 

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/user_list.css" />
-</head> 
+</head>
 <%@ include file="/header.jsp"%>
 <div class="user-list-box">
 	<%
@@ -32,11 +32,11 @@
 			<th>포인트</th>
 			<th>마지막 접속 시각</th>
 			<th>상태</th>
-		</tr> 
+		</tr>
 		<%
 			if (list != null) {
 				for (User data : list) {
-					String time; 
+					String time;
 					try {
 						time = format.format(data.getLastConnectTime().getTime());
 					} catch (Exception e) {
@@ -44,11 +44,12 @@
 					}
 		%>
 		<tr>
-			<td><a href="/YDHCommunity/content/user_view.jsp?user=<%=data.getEmail()%>"><%=data.getName()%></a></td>
-			<td><%=data.getIntroduce()%></td>
+			<td><a
+				href="/YDHCommunity/content/user_view.jsp?user=<%=data.getEmail()%>"><%=data.getName()%></a></td>
+			<td><%=data.getIntroduce() == null ? "" : data.getIntroduce()%></td>
 			<td><%=data.getPoint()%></td>
 			<td><%=time%></td>
-			<% 
+			<%
 				if (!userManager.getOnlines().contains(data.getEmail())) {
 							out.println("<td>오프라인</td>");
 						} else {

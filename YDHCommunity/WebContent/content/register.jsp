@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/login_register.css" />
 </head>
-<%@ include file="/header.jsp"%>
+<%@ include file="/header.jsp"%> 
 <div class="login-box">
 	<form action="/YDHCommunity/Register" method="post" border="2" align="center">
 		<tr>

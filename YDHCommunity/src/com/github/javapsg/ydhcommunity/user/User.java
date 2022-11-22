@@ -1,4 +1,4 @@
-package com.github.javapsg.user;
+package com.github.javapsg.ydhcommunity.user;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

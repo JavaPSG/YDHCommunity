@@ -1,4 +1,4 @@
-package com.github.javapsg.servlet;
+package com.github.javapsg.ydhcommunity.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.github.javapsg.user.User;
-import com.github.javapsg.user.UserDataManager;
+import com.github.javapsg.ydhcommunity.user.User;
+import com.github.javapsg.ydhcommunity.user.UserDataManager;
 
 @WebServlet("/Logout")
 public class LogoutServlet extends HttpServlet {
@@ -33,6 +33,8 @@ public class LogoutServlet extends HttpServlet {
 		if (accountData != null) {
 			manager.logout(UUID.fromString(accountData));
 		}
+		HttpSession session = request.getSession();
+		session.removeAttribute("account");
 		Cookie cookie = new Cookie("ydhcommunity_account", null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);

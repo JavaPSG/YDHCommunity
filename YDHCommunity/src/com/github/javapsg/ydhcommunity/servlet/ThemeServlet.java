@@ -1,6 +1,7 @@
-package com.github.javapsg.servlet;
+package com.github.javapsg.ydhcommunity.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.javapsg.user.User;
-import com.github.javapsg.user.UserDataManager;
+import org.apache.jasper.tagplugins.jstl.core.Out;
+
+import com.github.javapsg.ydhcommunity.user.User;
+import com.github.javapsg.ydhcommunity.user.UserDataManager;
 
 @WebServlet("/Theme")
 public class ThemeServlet extends HttpServlet {
@@ -25,7 +28,7 @@ public class ThemeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+		PrintWriter out = response.getWriter();
 		String accountData = getAccountData(request.getCookies());
 		Cookie cookie = null;
 
@@ -55,7 +58,7 @@ public class ThemeServlet extends HttpServlet {
 				response.addCookie(cookie);
 			}
 		}
-		response.sendRedirect(request.getParameter("url"));
+		response.sendRedirect(request.getParameter("url").replace("user_view.jsp", "user_view.jsp?user=" + request.getParameter("user")));
 	}
 
 	public String getAccountData(Cookie[] cookies) {

@@ -1,4 +1,4 @@
-package com.github.javapsg.theme;
+package com.github.javapsg.ydhcommunity.theme;
 
 public class Theme {
 

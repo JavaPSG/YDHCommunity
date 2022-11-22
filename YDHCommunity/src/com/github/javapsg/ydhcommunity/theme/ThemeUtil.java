@@ -1,9 +1,9 @@
-package com.github.javapsg.theme;
+package com.github.javapsg.ydhcommunity.theme;
 
 import javax.servlet.http.Cookie;
 
-import com.github.javapsg.user.User;
-import com.github.javapsg.user.UserDataManager;
+import com.github.javapsg.ydhcommunity.user.User;
+import com.github.javapsg.ydhcommunity.user.UserDataManager;
 
 public class ThemeUtil {
 

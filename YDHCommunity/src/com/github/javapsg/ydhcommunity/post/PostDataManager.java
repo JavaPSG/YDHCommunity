@@ -1,4 +1,4 @@
-package com.github.javapsg.post;
+package com.github.javapsg.ydhcommunity.post;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,9 +14,9 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.github.javapsg.user.User;
-import com.github.javapsg.user.UserDataManager;
-import com.github.javapsg.utils.JDBCUtil;
+import com.github.javapsg.ydhcommunity.user.User;
+import com.github.javapsg.ydhcommunity.user.UserDataManager;
+import com.github.javapsg.ydhcommunity.utils.JDBCUtil;
 
 public class PostDataManager {
 

@@ -1,4 +1,4 @@
-package com.github.javapsg.post;
+package com.github.javapsg.ydhcommunity.post;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.github.javapsg.user.User;
+import com.github.javapsg.ydhcommunity.user.User;
 
 public class Post implements Comparable<Post>{
 

@@ -1,4 +1,4 @@
-<%@page import="com.github.javapsg.post.Post"%>
+<%@page import="com.github.javapsg.ydhcommunity.post.Post"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>

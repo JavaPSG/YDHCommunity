@@ -33,16 +33,21 @@ public class LoginServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		UserDataManager manager = UserDataManager.getInstance();
-		email = request.getParameter("email");
+		email = request.getParameter("email").replace("@y-y.hs.kr", "");
 		password = request.getParameter("password");
 		user = manager.getUser(email);
 
-		if (user == null || !password.equals(user.getPassword())) {
+		if (user == null || !password.equals(user.getPassword()) || !request.getParameter("email").endsWith("@y-y.hs.kr")) {
 			out.println("<script> alert('이메일 또는 비밀번호가 틀렸습니다'); history.back(); </script>");
 		} else {
 			HttpSession session = request.getSession();
 			UUID uuid = manager.login(user.getEmail());
 			Cookie cookie = new Cookie("ydhcommunity_account", uuid.toString());
+			
+			// 발표용 테스트 코드
+			user.setPoint(user.getPoint() + 1);
+			manager.updateMember(user);
+			
 			cookie.setMaxAge(3600 * 24 * 365);
 			response.addCookie(cookie);
 			session.setAttribute("account", uuid);

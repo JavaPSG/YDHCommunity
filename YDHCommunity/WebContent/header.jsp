@@ -5,11 +5,11 @@
 <%@page import="com.github.javapsg.ydhcommunity.user.UserDataManager"%>
 <%@page import="java.util.UUID"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%> 
+	pageEncoding="UTF-8"%>
 <%
 	UserDataManager userManager = UserDataManager.getInstance();
 	PostDataManager postManager = PostDataManager.getInstance();
-	userManager.init();
+	userManager.init();  
 	Theme theme = ThemeUtil.getTheme(request.getCookies());
 	String result = theme.getId().split("-")[1];
 %>
@@ -28,9 +28,9 @@
 								<ul>
 									<li><a href="/YDHCommunity/index.jsp"><span
 											id="menu-icon">&#xe88a</span> <span>메인 화면</span></a></li>
-									<li><a href="/YDHCommunity/content/post_list.jsp"><span
-											id="menu-icon">&#xe241</span> <span>게시글</span></a></li>
-									<li><a href="/YDHCommunity/content/user_list.jsp"><span
+									<li><a href="/YDHCommunity/content/post_list.jsp?sort=time"><span
+											id="menu-icon">&#xe241</span> <span>게시물 목록</span></a></li>
+									<li><a href="/YDHCommunity/content/user_list.jsp?sort=time"><span
 											id="menu-icon">&#xe7ef</span> <span>사용자 목록</span></a></li>
 									<%
 										String url = request.getRequestURI();
@@ -43,16 +43,17 @@
 											id="menu-icon">&#xe174</span> <span>회원가입</span></a></li>
 									<%
 										} else {
-									%>
-									<li><a href="/YDHCommunity/content/user_view.jsp?user=<%= user.getEmail() %>"><span
+									%> 
+									<li><a
+										href="/YDHCommunity/content/user_view.jsp?user=<%=user.getEmail()%>"><span
 											id="menu-icon">&#xe7fd</span> <span>프로필</span></a></li>
-									<li><a href="/YDHCommunity/Logout?url=<%=url%>"><span
+									<li><a href="/YDHCommunity/Logout?url=<%=url%>&user=<%=(String) request.getParameter("user")%>&sort=<%=(String) request.getParameter("sort")%>"><span
 											id="menu-icon">&#xe174</span> <span>로그아웃</span></a></li>
 									<%
 										}
-									%> 
+									%>
 									<li id="theme"><a
-										href="/YDHCommunity/Theme?theme=<%=result%>&url=<%=url%>&user=<%=(String) request.getParameter("user")%>"
+										href="/YDHCommunity/Theme?theme=<%=result%>&url=<%=url%>&user=<%=(String) request.getParameter("user")%>&sort=<%=(String) request.getParameter("sort")%>"
 										id="<%=theme.getId()%>"><span id="menu-icon"><%=theme.getIcon()%></span>
 											<span><%=theme.getName()%></span></a></li>
 								</ul>

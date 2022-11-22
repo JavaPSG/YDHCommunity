@@ -109,20 +109,19 @@ public class Post implements Comparable<Post>{
 	public void setUuid(UUID uuid) {
 		this.uuid = uuid;
 	}
-	
-	@Override
-    public int compareTo(Post post) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-		int v1 = Integer.valueOf(format.format(post.getWriteTime().getTime()));
-		int v2 = Integer.valueOf(format.format(writeTime.getTime()));
-		System.out.println(v1);
-		System.out.println(v2);
-        if (v1 < v2){
-            return 1;
-        } else if (v1 > v2) {
-            return -1;
-        }
-        return 0;
-    }
 
+	@Override
+	public int compareTo(Post post) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		String s1 = String.valueOf(format.format(post.getWriteTime().getTime()));
+		String s2 = String.valueOf(format.format(writeTime.getTime()));
+		long v1 = Long.valueOf(s1);
+		long v2 = Long.valueOf(s2);
+		if (v1 < v2) {
+			return 1;
+		} else if (v1 > v2) {
+			return -1;
+		}
+		return 0;
+	}
 }

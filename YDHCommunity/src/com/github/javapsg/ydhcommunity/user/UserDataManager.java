@@ -32,8 +32,9 @@ public class UserDataManager {
 	// 현재 로그이네 되어있는 유저 UUID와 이메일 맵
 	private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
 	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+	private SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
 
-	// 싱긅톤: 내부 클래스 인스턴스
+	// 싱글톤: 내부 클래스 인스턴스
 	private static class InnerInstanceClazz {
 		private static final UserDataManager instance = new UserDataManager();
 	}
@@ -80,6 +81,7 @@ public class UserDataManager {
 	 * @param email 사용자의 이메일
 	 */
 	public void logout(UUID uuid) {
+		System.out.println("(Account) \"" + accountMap.get(uuid) + "\" 계정 로그아웃");
 		accountMap.remove(uuid);
 	}
 
@@ -97,7 +99,7 @@ public class UserDataManager {
 		User user = null;
 
 		try {
-			pstmt = conn.prepareStatement(
+			pstmt = conn.prepareStatement( 
 					"select name, introduce, email, password, white_theme, last_connect_time, point, posts from member order by last_connect_time");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -128,6 +130,9 @@ public class UserDataManager {
 	 * @return SQL 문을 실행한 결과
 	 */
 	public int insertMember(User user) {
+		if (userMap.keySet().contains(user.getEmail())) {
+			return updateMember(user);
+		}
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -176,12 +181,17 @@ public class UserDataManager {
 			pstmt.setString(3, user.getPassword());
 			pstmt.setInt(4, user.isWhiteTheme() ? 1 : 0);
 			pstmt.setString(5, format.format(new Date()));
-			pstmt.setInt(6, user.getPoint());
 			pstmt.setString(7, user.getEmail());
-			result = pstmt.executeUpdate();
 			Calendar calendar = Calendar.getInstance();
+			int c1 = Integer.parseInt(format2.format(user.getLastConnectTime().getTime()));
+			int c2 = Integer.parseInt(format2.format(calendar.getTime()));
+			if (c2 - c1 > 0) {
+				user.setPoint(user.getPoint() + 1);
+			}
+			pstmt.setInt(6, user.getPoint());
 			calendar.setTime(date);
 			user.setLastConnectTime(calendar);
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -222,28 +232,7 @@ public class UserDataManager {
 	public Collection<String> getOnlines() {
 		return accountMap.values();
 	}
-
-//	/***
-//	 * 현재 계정의 상태 확인
-//	 * @param cookies 쿠키 배열
-//	 * @param sessions 세션 Enumeration
-//	 * @param user 유저 데이터
-//	 * @return 오프라인, 연결 끊김, 온라인
-//	 */
-//	public String getStatus(Cookie[] cookies, Enumeration<String> sessions) {
-//		String uuidStr = getAccountData(cookies);
-//		if (uuid != null) {
-//			UUID uuid = UUID.fromString(uuidStr);
-//			if (accountMap.containsKey(uuid) ) {
-//				User user = accountMap.get(uuid);
-//			}
-//					&& enumerationAsStream(sessions).anyMatch(value -> value.equals("account-" + uuid))) {
-//				
-//			}
-//		}
-//		return "오프라인";
-//	}
-
+	
 	// Enumeration to Stream 변환 메소드
 	private <T> Stream<T> enumerationAsStream(Enumeration<T> e) {
 	     return StreamSupport.stream(
@@ -273,7 +262,7 @@ public class UserDataManager {
 					return c.getValue();
 				}
 			}
-		}
+		} 
 		return null;
 	}
 

@@ -17,20 +17,10 @@
 }
 
 body #content .login-box input.button{
-	border-color: #1a1a1a;
-	background: #ebe8e8;
 	font-size: 0.9em;
 }
 
-body.white-theme #content .login-box input.button{
-	border-color: #f7f7f7;
-	background: #212121;
-}
-
-
 body #content .login-box input{
-	color: #1a1a1a;
-	background: #ebe8e8;
 	border-width: 0px;
 	border-radius: 5px;
 	text-align: center;
@@ -39,11 +29,6 @@ body #content .login-box input{
 	margin-top: 7px;
 	margin-bottom: 10px;
 }
-
-body.white-theme #content .login-box input{
-	color: #f7f7f7;
-	background: #212121;
-} 
 
 body #content .login-box input.end{
 	margin-bottom: 15px;

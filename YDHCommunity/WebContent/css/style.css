@@ -7,11 +7,15 @@
 	list-style: none;
 	color: inherit;
 }
-body.white-theme {
+
+th {
+	font-weight: 600;	
+}   
+
+body.white-theme { 
 	color: #1a1a1a;
 	background: #ebe8e8;
 }
-
 
 body {
 	color: #f7f7f7;
@@ -25,7 +29,7 @@ body {
 	backface-visibility: hidden;
 	transition: background-color, color 0.5s ease-in-out;
 	-webkit-transition: background-color, color 0.5s ease-in-out;
-	-moz-transition: background-color, color 0.5s ease-in-out; 
+	-moz-transition: background-color, color 0.5s ease-in-out;
 	-o-transition: background-color, color 0.5s ease-in-out;
 }
 
@@ -115,4 +119,140 @@ body {
 	position: fixed;
 	width: 100%;
 	height: 100%;
+}
+
+
+body #content input{
+	transform: translateZ(0);
+	will-change: transform;
+	backface-visibility: hidden;
+	transition: background-color, color 0.5s ease-in-out;
+	-webkit-transition: background-color, color 0.5s ease-in-out;
+	-moz-transition: background-color, color 0.5s ease-in-out;
+	-o-transition: background-color, color 0.5s ease-in-out;
+	color: #1a1a1a;
+	background: #ebe8e8;
+}
+
+body.white-theme #content input{
+	color: #f7f7f7;
+	background: #212121;
+} 
+
+body #content input.button{
+	border-color: #1a1a1a;
+	background: #ebe8e8;
+}
+
+body.white-theme #content input.button{
+	border-color: #f7f7f7;
+	background: #212121; 
+}
+
+body #content input.button-danger{
+	color: #f53636;
+}
+
+body.white-theme #content input.button-danger{
+	color: #f53636;
+}
+ 
+ 
+#content .main-box {
+	position: fixed;
+	text-align: center;
+	align-content: center;
+	vertical-align: middle;
+	justify-content: center;
+	text-align: center;  
+	height: 120%;
+	width: 100%;
+    align-items: center; 
+    
+	border-width: 1px;
+    display: flex;
+}
+
+#content .main-box th {
+	height: 30px;
+	text-align: center;
+	border-left: 0px;
+	border-top: 0px;
+	border-right: 0px; 
+	border-bottom: solid;
+}
+
+#content .main-box .user-box th {
+    border-bottom-color: #55c3f2;
+}
+
+#content .main-box .post-box th {
+    border-bottom-color: #f28f55;
+}
+#content .main-box tr {
+	line-height: 0px;
+}
+
+#content .main-box table {
+	border: 0px;  
+}
+
+#content .main-box td {
+	height: 30px;
+	border: 0px;  
+	text-align: center;
+}
+
+#content .user-box {
+	position: fixed;
+	text-align: center;
+	vertical-align: middle;
+	text-align: center;  
+	height: 80%;
+	left: 55%;
+	flex: 1;
+}
+#content .post-box {
+	position: fixed;
+	text-align: center;
+	vertical-align: middle;
+	text-align: center;  
+	height: 80%;
+	right: 55%;
+	flex: 1;
+}
+
+body #content .main-box .name {
+	margin: 10px 10px;
+	font-size: 2.5em; 
+}
+
+body #content .main-box .info {  
+	margin: 10px 10px;
+	border: solid;  
+    border-color: #f7f7f7;
+    padding: 5px 5px;
+}
+
+body.white-theme #content .main-box .info {
+	border-color: #1a1a1a;
+} 
+#content .main-box form {
+	margin: 0px 10px;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+body #content .main-box input.button{
+	font-size: 0.9em;
+}
+
+body #content .main-box input{
+	border-width: 0px;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: lighter;
+	font-size: 0.9em;
+	margin-top: 7px;
+	margin-bottom: 10px;
 }

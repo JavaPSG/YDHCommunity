@@ -15,7 +15,7 @@
 	String userE = (String) request.getParameter("user");
 %>
 <meta charset="UTF-8">
-<title>양디고 커뮤니티 - 프로필 - <%=userE%>>
+<title>양디고 커뮤니티 - 프로필 - <%=userE%>
 </title>
 <link rel="stylesheet" href="/YDHCommunity/css/style.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/font.css" />
@@ -37,17 +37,17 @@
 	%>
 	<div>
 		<div class="name">
-			<h2><%=data.getName()%></h2>
-		</div>
+			<h2><%=data.getName()%> 님의 프로필</h2> 
+		</div> 
 		<div class="info">
-			<table width="800px" border="1" align="center">
+			<table width="700px" border="1" align="center">
 				<tr>
 					<th>상태 메세지</th>
 					<td><%=data.getIntroduce() == null ? "" : data.getIntroduce()%></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><%=data.getEmail()%></td>
+					<td><%=data.getEmail()%>@y-y.hs.kr</td>
 				</tr>
 				<tr>
 					<th>포인트</th>
@@ -62,16 +62,25 @@
 					<%
 						if (!userManager.getOnlines().contains(data.getEmail())) {
 							out.println("<td>오프라인</td>");
-						} else if (false) {
-
 						} else {
-							out.println("<td>로그인됨</td>");
+							out.println("<td>온라인</td>");
 						}
 					%>
 				</tr>
-				<tr>
-				</tr>
 			</table>
+		</div>
+		<div class="under">
+			<%
+				User thisUser = userManager.getUser(request.getCookies());
+				if (thisUser != null && thisUser.getName() != null && !thisUser.getName().isEmpty() && thisUser.getEmail().equals(data.getEmail())) {
+			%>
+			<form action="/YDHCommunity/content/user_edit.jsp" method="post" border="1"
+				align="center">
+				<input class="button" type="submit" value="  수정  ">
+			</form>
+			<%
+				}
+			%>
 		</div>
 	</div>
 

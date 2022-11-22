@@ -33,9 +33,8 @@
 		<tr> 
 			<td colspan="2">
 			<input class="button" type="submit" value="  가입  ">&nbsp;&nbsp;
-			<input class="button" type="reset" value="  취소  "></td>
+			<input class="button" type="reset" value="  초기화  "></td>
 		</tr>
-		</table>
 	</form>
 </div>
 <%@ include file="/footer.jsp"%>

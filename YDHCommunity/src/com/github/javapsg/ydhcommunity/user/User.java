@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class User implements Comparable<User>{
+public class User{
 
 	private String name = "";
 	private String introduce = "";
@@ -21,8 +21,8 @@ public class User implements Comparable<User>{
 	private int point = 0;
 	private List<UUID> posts = Collections.synchronizedList(new ArrayList());
 
-	public User(String name, String introduce, String email, String password, boolean isWhiteTheme, String lastConnectTime, int point,
-			Collection<UUID> posts) {
+	public User(String name, String introduce, String email, String password, boolean isWhiteTheme,
+			String lastConnectTime, int point, Collection<UUID> posts) {
 		this.name = name;
 		this.introduce = introduce;
 		this.email = email;
@@ -56,7 +56,7 @@ public class User implements Comparable<User>{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getIntroduce() {
 		return introduce;
 	}
@@ -97,7 +97,7 @@ public class User implements Comparable<User>{
 	public void setLastConnectTime(Calendar lastConnectTime) {
 		this.lastConnectTime = lastConnectTime;
 	}
-	
+
 	public int getPoint() {
 		return point;
 	}
@@ -117,22 +117,5 @@ public class User implements Comparable<User>{
 	public List<UUID> getPosts() {
 		return posts;
 	}
-	
-	@Override
-    public int compareTo(User user) {
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
-		System.out.println(format.format(user.lastConnectTime.getTime()));
-		System.out.println(format.format(lastConnectTime.getTime()));
-		int v1 = Integer.valueOf(format.format(user.lastConnectTime.getTime()));
-		int v2 = Integer.valueOf(format.format(lastConnectTime.getTime()));
-		System.out.println(v1);
-		System.out.println(v2);
-        if (v1 < v2){
-            return 1;
-        } else if (v1 > v2) {
-            return -1;
-        }
-        return 0;
-    }
 
 }

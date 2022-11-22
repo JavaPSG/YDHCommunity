@@ -1,0 +1,53 @@
+#content .user-edit-box {
+	position: fixed;
+	text-align: center;
+	align-content: center;
+	vertical-align: middle;
+	justify-content: center;
+	text-align: center;  
+	height: 80%;
+    align-items: center; 
+    display: flex; 
+}
+
+#content .user-edit-box .info {
+	width: 10em;
+	position: fixed;
+	border-color: aqua;
+	border-radius: 2px;
+	justify-content: center;
+	display: flex;
+	text-align: center;
+	height: 90%;
+    align-items: center;
+    vertical-align: middle; 
+}
+
+#content .user-edit-box .info form {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+body #content .user-edit-box .info input.button{
+	font-size: 0.9em;
+}
+
+body #content .user-edit-box .info input.button-danger{
+	font-size: 0.9em;
+	max-width: 3em;
+}
+
+
+body #content .user-edit-box .info input{
+	border-width: 0px;
+	border-radius: 5px;
+	text-align: center; 
+	font-weight: lighter;
+	font-size: 0.9em;
+	margin-top: 7px;
+	margin-bottom: 10px;
+}
+
+body #content .user-edit-box .info input.end{
+	margin-bottom: 15px;
+}

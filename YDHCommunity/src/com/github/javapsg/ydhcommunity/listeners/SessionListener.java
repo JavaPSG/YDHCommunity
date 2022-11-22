@@ -14,16 +14,16 @@ public class SessionListener implements HttpSessionListener {
 
 	@Override
 	public void sessionCreated(HttpSessionEvent event) {
-		System.out.println("[Session] »õ·Î¿î ¼¼¼Ç »ı¼ºµÊ");
+		System.out.println("[Session] ìƒˆë¡œìš´ ì„¸ì…˜ì„ ìƒì„±í•¨");
 	}
 
 	@Override
 	public void sessionDestroyed(HttpSessionEvent event) {
-		System.out.println("[Session] ¼¼¼Ç Á¦°ÅÁß...");
+		System.out.println("[Session] ì„¸ì…˜ ì œê±°ì¤‘...");
 		HttpSession session = event.getSession();
 		UUID uuid = (UUID) session.getAttribute("account");
 		if (uuid != null) {
-			System.out.println("[Session] ¼¼¼Ç¿¡¼­ ¾òÀº ·Î±×ÀÎ À¯Àú µ¥ÀÌÅÍ UUID Á¤¸®");
+			System.out.println("[Session] ì„¸ì…˜ê³¼ ê·¸ ì„¸ì…˜ì˜ ìœ ì € ê³„ì • UUID ê°’ì„ í•¨ê»˜ ì œê±°");
 			UserDataManager.getInstance().logout(uuid);
 		}
 	}

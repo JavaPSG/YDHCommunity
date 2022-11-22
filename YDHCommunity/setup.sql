@@ -2,8 +2,10 @@ CREATE TABLE member(name VARCHAR2(200),introduce VARCHAR2(200),email VARCHAR2(20
 
 select * from member
 
+--drop 명령어 실행 후 서버 재시작 필요합니다!
 drop table member
 
+--DB 연결 정보
 --Host: database-1.cqwvi7bi8mih.ap-northeast-1.rds.amazonaws.com
 --Port: 1521
 --SID: ORCL

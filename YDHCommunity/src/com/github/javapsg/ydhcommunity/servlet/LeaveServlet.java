@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.github.javapsg.ydhcommunity.user.User;
 import com.github.javapsg.ydhcommunity.user.UserDataManager;
 
-@WebServlet("/Logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/Leave")
+public class LeaveServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public LogoutServlet() {
+	public LeaveServlet() {
 		super();
 	}
 
@@ -28,20 +29,24 @@ public class LogoutServlet extends HttpServlet {
 
 		UserDataManager manager = UserDataManager.getInstance();
 		String uuid = manager.getAccountData(request.getCookies());
+		User user = manager.getUser(request.getCookies());
+		if (user != null) {
+			user.setIntroduce("");
+			user.setName("");
+			user.setPassword("");
+			user.setPoint(0);
+			System.out.println("(Account) \"" + user.getEmail() + "\" 계정 탈퇴 완료");
+			manager.updateMember(user);
+		}
 		if (uuid != null) {
 			manager.logout(UUID.fromString(uuid));
 		}
+		System.out.println("?");
 		HttpSession session = request.getSession();
 		session.removeAttribute("account");
 		Cookie cookie = new Cookie("ydhcommunity_account", null);
 		cookie.setMaxAge(0);
 		response.addCookie(cookie);
-		if (request.getParameter("sort") == null && request.getParameter("user") == null) {
-			response.sendRedirect("/YDHCommunity/index.jsp");
-		} else {
-			response.sendRedirect(request.getParameter("url")
-					.replace("user_list.jsp", "user_list.jsp?sort=" + request.getParameter("sort"))
-					.replace("user_view.jsp", "user_view.jsp?user=" + request.getParameter("user")));
-		}
+		response.sendRedirect("/YDHCommunity/index.jsp");
 	}
 }

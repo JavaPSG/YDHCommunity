@@ -4,15 +4,15 @@
 	align-content: center;
 	vertical-align: middle;
 	justify-content: center;
-	text-align: center;
-	height: 70%;
-    align-items: center;
-    display: flex;
+	text-align: center;  
+	height: 80%;
+    align-items: center; 
+    display: flex; 
 }
 
 body #content .user-view-box .name {
 	margin: 10px 10px;
-	font-size: 3em;
+	font-size: 3em; 
 }
 
 body #content .user-view-box .info {  
@@ -31,15 +31,15 @@ body.white-theme #content .user-view-box .info {
 	border-left: 0px;
 	border-top: 0px;
 	border-bottom: 0px;
-	border-right: outset;
-    border-right-color: aqua;
+	border-right: solid;
+    border-right-color: #55c3f2;
 }
 
 #content .user-view-box .info tr {
 	line-height: 0px;
 }
 
-#content .user-view-box .info table {
+#content .user-view-box .info table, #content .user-view-box .info form{ 
 	border: 0px;  
 }
 
@@ -49,3 +49,31 @@ body.white-theme #content .user-view-box .info {
 	border: 0px;  
 	text-align: left;
 }
+
+
+
+#content .user-view-box .under {
+	justify-content: center;
+    display: flex;
+}
+#content .user-view-box form {
+	margin: 0px 10px;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+body #content .user-view-box input.button{
+	font-size: 0.9em;
+}
+
+body #content .user-view-box input{
+	border-width: 0px;
+	border-radius: 5px;
+	text-align: center;
+	font-weight: lighter;
+	font-size: 0.9em;
+	margin-top: 7px;
+	margin-bottom: 10px;
+}
+
+

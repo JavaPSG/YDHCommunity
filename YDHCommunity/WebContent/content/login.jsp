@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/login_register.css" />
 </head>
-<%@ include file="/header.jsp"%>
+<%@ include file="/header.jsp"%> 
 <div class="login-box">
 	<form action="/YDHCommunity/Login" method="post" border="2" align="center">
 		<tr>
@@ -24,10 +24,9 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-			<input class="button" type="submit" value="  로그인  ">&nbsp;&nbsp;
-			<input class="button" type="reset" value="  취소  "></td>
+			<input class="button" type="submit" value="  로그인  ">&nbsp;&nbsp; 
+			<input class="button" type="reset" value="  초기화  "></td>
 		</tr>
-		</table>
 	</form>
 </div>
 <%@ include file="/footer.jsp"%>

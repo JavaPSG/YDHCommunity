@@ -23,3 +23,7 @@
 	font-variation-settings: 'FILL' 1, 'wght' 700, 'GRAD' -25, 'opsz' 24;
 	vertical-align: top;
 }
+
+.link {
+	text-decoration: underline;
+}

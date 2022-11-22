@@ -1,20 +1,19 @@
 #content .login-box {
 	width: 10em;
-	height: 10em;
 	position: fixed;
 	border-color: aqua;
 	border-radius: 2px;
-	top: 50%;
-	left: 50%;
-	margin: -100px 0 0 -100px;
 	justify-content: center;
 	display: flex;
 	text-align: center;
+	height: 90%;
+    align-items: center;
 }
+
 
 #content .login-box form {
 	text-align: center;
-	font-size: 1.1em;
+	font-size: 1.5em;
 }
 
 body #content .login-box input.button{
@@ -37,9 +36,15 @@ body #content .login-box input{
 	text-align: center;
 	font-weight: lighter;
 	font-size: 0.9em;
+	margin-top: 7px;
+	margin-bottom: 10px;
 }
 
 body.white-theme #content .login-box input{
 	color: #f7f7f7;
 	background: #212121;
+} 
+
+body #content .login-box input.end{
+	margin-bottom: 15px;
 }

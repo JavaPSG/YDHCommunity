@@ -12,19 +12,23 @@ import java.util.UUID;
 
 public class User implements Comparable<User>{
 
-	private String name;
-	private String email;
-	private String password;
+	private String name = "";
+	private String introduce = "";
+	private String email = "";
+	private String password = "";
 	private boolean isWhiteTheme = false;
 	private Calendar lastConnectTime;
+	private int point = 0;
 	private List<UUID> posts = Collections.synchronizedList(new ArrayList());
 
-	public User(String name, String email, String password, boolean isWhiteTheme, String lastConnectTime,
+	public User(String name, String introduce, String email, String password, boolean isWhiteTheme, String lastConnectTime, int point,
 			Collection<UUID> posts) {
 		this.name = name;
+		this.introduce = introduce;
 		this.email = email;
 		this.password = password;
 		this.isWhiteTheme = isWhiteTheme;
+		this.point = point;
 		this.posts.clear();
 		this.posts.addAll(posts);
 		Calendar calendar = Calendar.getInstance();
@@ -51,6 +55,14 @@ public class User implements Comparable<User>{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
 	}
 
 	public String getEmail() {
@@ -85,6 +97,14 @@ public class User implements Comparable<User>{
 	public void setLastConnectTime(Calendar lastConnectTime) {
 		this.lastConnectTime = lastConnectTime;
 	}
+	
+	public int getPoint() {
+		return point;
+	}
+
+	public void setPoint(int point) {
+		this.point = point;
+	}
 
 	public void addPost(UUID uuid) {
 		posts.add(uuid);
@@ -101,6 +121,8 @@ public class User implements Comparable<User>{
 	@Override
     public int compareTo(User user) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+		System.out.println(format.format(user.lastConnectTime.getTime()));
+		System.out.println(format.format(lastConnectTime.getTime()));
 		int v1 = Integer.valueOf(format.format(user.lastConnectTime.getTime()));
 		int v2 = Integer.valueOf(format.format(lastConnectTime.getTime()));
 		System.out.println(v1);

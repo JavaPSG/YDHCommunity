@@ -46,8 +46,8 @@ public class RegisterServlet extends HttpServlet {
 				.anyMatch(value -> value.getName().equals(request.getParameter("name")))) {
 			out.println("<script> alert('이미 사용된 닉네임입니다'); history.back(); </script>");
 		} else {
-			User user = new User(request.getParameter("name"), request.getParameter("email"),
-					request.getParameter("password"), false, format.format(new Date()), Arrays.asList());
+			User user = new User(request.getParameter("name"), "", request.getParameter("email"),
+					request.getParameter("password"), false, format.format(new Date()), 0, Arrays.asList());
 			result = manager.insertMember(user);
 			if (result > 0) {
 				HttpSession session = request.getSession();

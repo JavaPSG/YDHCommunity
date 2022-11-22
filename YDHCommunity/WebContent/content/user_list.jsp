@@ -26,9 +26,10 @@
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 a h시 mm분", new Locale("ko", "KR"));
 	%>
 	<table width="800px" border="1" align="center">
-		<tr>
+		<tr class="type">
 			<th>닉네임</th>
-			<th>이메일</th>
+			<th>상태 메세지</th>
+			<th>포인트</th>
 			<th>마지막 접속 시각</th>
 			<th>상태</th>
 		</tr> 
@@ -43,10 +44,11 @@
 					}
 		%>
 		<tr>
-			<td><%=data.getName()%></td>
-			<td><%=data.getEmail()%></td>
+			<td><a href="/YDHCommunity/content/user_view.jsp?user=<%=data.getEmail()%>"><%=data.getName()%></a></td>
+			<td><%=data.getIntroduce()%></td>
+			<td><%=data.getPoint()%></td>
 			<td><%=time%></td>
-			<%
+			<% 
 				if (!userManager.getOnlines().contains(data.getEmail())) {
 							out.println("<td>오프라인</td>");
 						} else {

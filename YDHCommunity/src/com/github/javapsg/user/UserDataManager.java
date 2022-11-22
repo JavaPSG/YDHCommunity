@@ -10,10 +10,16 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.UUID;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javax.servlet.http.Cookie;
 
@@ -24,7 +30,8 @@ public class UserDataManager {
 	// 모든 유저 데이터 맵
 	private final Map<String, User> userMap = Collections.synchronizedMap(new HashMap<>());
 	// 현재 로그이네 되어있는 유저 UUID와 이메일 맵
- private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
+	// https://micropilot.tistory.com/257 로 변경
+	private final Map<UUID, String> accountMap = Collections.synchronizedMap(new HashMap<>());
 	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
 	// 싱긅톤: 내부 클래스 인스턴스
@@ -34,6 +41,7 @@ public class UserDataManager {
 
 	/***
 	 * 싱글톤 패턴을 이용한 여러 위치에서 같은 인스턴스를 사용하기 위한 메소드
+	 * 
 	 * @return 아 클래스의 싱글톤 인스턴스
 	 */
 	public static UserDataManager getInstance() {
@@ -41,7 +49,8 @@ public class UserDataManager {
 	}
 
 	/***
-	 * 중복되지 않은 UUID 발급 
+	 * 중복되지 않은 UUID 발급
+	 * 
 	 * @return 랜덤 UUID
 	 */
 	private UUID createUUID() {
@@ -55,6 +64,7 @@ public class UserDataManager {
 
 	/***
 	 * 현재 로그인 중인 사용자의 이메일을 값으로 랜덤 UUID를 저장
+	 * 
 	 * @param email 사용자의 이메일
 	 * @return 발급받은 랜덤 UUID
 	 */
@@ -67,6 +77,7 @@ public class UserDataManager {
 
 	/***
 	 * 현재 로그인 중인 사용자 데이터를 제거
+	 * 
 	 * @param email 사용자의 이메일
 	 */
 	public void logout(UUID uuid) {
@@ -88,12 +99,12 @@ public class UserDataManager {
 
 		try {
 			pstmt = conn.prepareStatement(
-					"select name, email, password, white_theme, last_connect_time, posts from member order by last_connect_time");
+					"select name, introduce, email, password, white_theme, last_connect_time, posts from member order by last_connect_time");
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				user = new User(rs.getString("name"), rs.getString("email"), rs.getString("password"),
-						rs.getBoolean("white_theme"), rs.getString("last_connect_time"),
-						getPosts(rs.getString("posts")));
+				user = new User(rs.getString("name"), rs.getString("introduce"), rs.getString("email"),
+						rs.getString("password"), rs.getBoolean("white_theme"), rs.getString("last_connect_time"),
+						rs.getInt("point"), getPosts(rs.getString("posts")));
 				addUser(user);
 			}
 		} catch (Exception e) {
@@ -103,8 +114,8 @@ public class UserDataManager {
 		}
 		System.out.println(userMap.values());
 	}
-		
-	private Collection<UUID> getPosts(String str){
+
+	private Collection<UUID> getPosts(String str) {
 		if (str == null || (str != null && str.isEmpty())) {
 			return Arrays.asList();
 		}
@@ -113,6 +124,7 @@ public class UserDataManager {
 
 	/***
 	 * DB와 맵에 유저 데이터를 저장
+	 * 
 	 * @param user 사용자
 	 * @return SQL 문을 실행한 결과
 	 */
@@ -121,16 +133,18 @@ public class UserDataManager {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		Date date = new Date();
-		String sql = "insert into member(name, email, password, white_theme, last_connect_time) values(?,?,?,?,?)";
+		String sql = "insert into member(name, introduce, email, password, white_theme, last_connect_time, point) values(?,?,?,?,?,?,?)";
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, user.getName());
-			pstmt.setString(2, user.getEmail());
-			pstmt.setString(3, user.getPassword());
-			pstmt.setInt(4, user.isWhiteTheme() ? 1 : 0);
-			pstmt.setString(5, format.format(date));
+			pstmt.setString(2, user.getIntroduce());
+			pstmt.setString(3, user.getEmail());
+			pstmt.setString(4, user.getPassword());
+			pstmt.setInt(5, user.isWhiteTheme() ? 1 : 0);
+			pstmt.setString(6, format.format(date));
+			pstmt.setInt(7, user.getPoint());
 			result = pstmt.executeUpdate();
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
@@ -144,6 +158,7 @@ public class UserDataManager {
 
 	/***
 	 * DB와 맵에 기존 유저 데이터를 갱신
+	 * 
 	 * @param user 사용자
 	 * @return SQL 문을 실행한 결과
 	 */
@@ -152,16 +167,18 @@ public class UserDataManager {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		Date date = new Date();
-		String sql = "update member set name = ?, password = ?, white_theme = ?, last_connect_time = ? where email = ?";
+		String sql = "update member set name = ?, introduce = ?, password = ?, white_theme = ?, last_connect_time = ?, point = ? where email = ?";
 		try {
 			conn = JDBCUtil.getConnection();
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, user.getName());
-			pstmt.setString(2, user.getPassword());
-			pstmt.setInt(3, user.isWhiteTheme() ? 1 : 0);
-			pstmt.setString(4, format.format(new Date()));
-			pstmt.setString(5, user.getEmail());
+			pstmt.setString(2, user.getIntroduce());
+			pstmt.setString(3, user.getPassword());
+			pstmt.setInt(4, user.isWhiteTheme() ? 1 : 0);
+			pstmt.setString(5, format.format(new Date()));
+			pstmt.setInt(6, user.getPoint());
+			pstmt.setString(7, user.getEmail());
 			result = pstmt.executeUpdate();
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
@@ -202,13 +219,50 @@ public class UserDataManager {
 	public Collection<String> getEmails() {
 		return userMap.keySet();
 	}
-	
+
 	public Collection<String> getOnlines() {
 		return accountMap.values();
 	}
- 
+
+//	/***
+//	 * 현재 계정의 상태 확인
+//	 * @param cookies 쿠키 배열
+//	 * @param sessions 세션 Enumeration
+//	 * @param user 유저 데이터
+//	 * @return 오프라인, 연결 끊김, 온라인
+//	 */
+//	public String getStatus(Cookie[] cookies, Enumeration<String> sessions) {
+//		String uuidStr = getAccountData(cookies);
+//		if (uuid != null) {
+//			UUID uuid = UUID.fromString(uuidStr);
+//			if (accountMap.containsKey(uuid) ) {
+//				User user = accountMap.get(uuid);
+//			}
+//					&& enumerationAsStream(sessions).anyMatch(value -> value.equals("account-" + uuid))) {
+//				
+//			}
+//		}
+//		return "오프라인";
+//	}
+
+	// Enumeration to Stream 변환 메소드
+	private <T> Stream<T> enumerationAsStream(Enumeration<T> e) {
+	     return StreamSupport.stream(
+	         Spliterators.spliteratorUnknownSize(
+	             new Iterator<T>() {
+	                 public T next() {
+	                     return e.nextElement();
+	                 }
+	                 public boolean hasNext() {
+	                     return e.hasMoreElements();
+	                 }
+	             },
+	             Spliterator.ORDERED), false);
+	 }
+
 	/***
 	 * 쿠기 배열에서 지정된 쿠키에서 저장했던 랜덤 UUID 조회
+	 * 
 	 * @param cookies 쿠키 배열
 	 * @return 조회한 UUID의 String 타입
 	 */
@@ -226,6 +280,7 @@ public class UserDataManager {
 
 	/***
 	 * 쿠기 배열에서 지정된 쿠키에서 저장했던 랜덤 UUID으로 이메일을 얻고 그 이메일로 유저 데이터를 조회
+	 * 
 	 * @param cookies 쿠키 배열
 	 * @return 조회한 유저 데이터
 	 */

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>양디고 커뮤니티 - 로그인</title>
+<title>양디고 커뮤니티 - 회원가입</title>
 <link rel="stylesheet" href="/YDHCommunity/css/font.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/style.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
@@ -28,7 +28,7 @@
 		</tr>
 		<tr>
 			<td>비밀번호 확인</td>
-			<td><input type="password" name="password_check"> </td>
+			<td><input class="end" type="password" name="password_check"> </td>
 		</tr>
 		<tr> 
 			<td colspan="2">

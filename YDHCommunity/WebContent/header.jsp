@@ -33,7 +33,7 @@
 									<li><a href="/YDHCommunity/content/user_list.jsp"><span
 											id="menu-icon">&#xe7ef</span> <span>사용자 목록</span></a></li>
 									<%
-										String url = request.getRequestURI();
+										String url = request.getURequestURI();
 										User user = userManager.getUser(request.getCookies());
 										if (user == null) {
 									%>
@@ -44,6 +44,8 @@
 									<%
 										} else {
 									%>
+									<li><a href="/YDHCommunity/content/user_view.jsp?user=<%= user.getEmail() %>"><span
+											id="menu-icon">&#xe7fd</span> <span>프로필</span></a></li>
 									<li><a href="/YDHCommunity/Logout?url=<%=url%>"><span
 											id="menu-icon">&#xe174</span> <span>로그아웃</span></a></li>
 									<%

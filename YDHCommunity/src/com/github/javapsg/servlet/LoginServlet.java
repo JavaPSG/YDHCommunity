@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 			Cookie cookie = new Cookie("ydhcommunity_account", uuid.toString());
 			cookie.setMaxAge(3600 * 24 * 365);
 			response.addCookie(cookie);
-			session.setAttribute("login-" + uuid, user);
+			session.setAttribute("account-" + uuid.toString(), 0);
 			response.sendRedirect("/YDHCommunity/index.jsp");
 		}
 	}

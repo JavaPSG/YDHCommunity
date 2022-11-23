@@ -11,3 +11,7 @@ drop table member
 --SID: ORCL
 --User name: admin_ys
 --Password: m31j1gnmd0210n3ef2
+
+CREATE TABLE post(writer VARCHAR2(200), title VARCHAR2(200), content VARCHAR2(200), recommanders VARCHAR2(200), write_time NUMBER, uuid VARCHAR2(200)); 
+
+select * from  post

@@ -25,46 +25,48 @@
 	<%
 		List<Post> list = new ArrayList(postManager.getPosts());
 		SimpleDateFormat format = new SimpleDateFormat("yy-MM-dd HH:mm:ss", new Locale("ko", "KR"));
-		Collections.sort(list, new Comparator<Post>(){
-					@Override
-					public int compare(Post p1, Post p2) {
-						switch ((String)request.getParameter("sort")){
-						case "title": {
-							return p1.getTitle().compareTo(p2.getTitle());
-						}
-						case "writer": {
-							UserDataManager udm = UserDataManager.getInstance();
-							return udm.getUser(p1.getWriter()).getName().compareTo(udm.getUser(p2.getWriter()).getName());
-						}
-						case "rec": {
-							return ((Integer)p2.getRec().size()).compareTo(((Integer)p1.getRec().size()));
-						}
-						default: {
-							SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss", new Locale("ko", "KR"));
-							Long v1 = Long.valueOf(format.format(p1.getWriteTime().getTime()));
-							Long v2 = Long.valueOf(format.format(p2.getWriteTime().getTime()));
-							return v2.compareTo(v1);
-						}
-					}
+		Collections.sort(list, new Comparator<Post>() {
+			@Override
+			public int compare(Post p1, Post p2) { 
+			System.out.println((p1.getTitle() == null) + " / " + (p1.getContent() == null) + " / " + (p1.getWriter() == null) + " / " + (p1.getRec() == null) + " / " + (p1.getWriteTime() == null) + " / " + (p1.getUuid() == null));
+				switch ((String) request.getParameter("sort")) {
+				case "title": {
+					return p1.getTitle().compareTo(p2.getTitle());
 				}
+				case "writer": {
+					UserDataManager udm = UserDataManager.getInstance();
+					return udm.getUser(p1.getWriter()).getName().compareTo(udm.getUser(p2.getWriter()).getName());
+				}
+				case "rec": { 
+					return ((Integer) (p2.getRec() == null ? 0 : p2.getRec().size())).compareTo((Integer) (p1.getRec() == null ? 0 : p1.getRec().size()));
+				}
+				default: {
+					SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMddHHmmss", new Locale("ko", "KR"));
+					Long v1 = Long.valueOf(format1.format(p1.getWriteTime().getTime()));
+					Long v2 = Long.valueOf(format1.format(p2.getWriteTime().getTime()));
+					return v2.compareTo(v1);
+				}
+				}
+			}
 		});
-		String sortType = (String)request.getParameter("sort") == null ? "time" : (String)request.getParameter("sort");
+		String sortType = (String) request.getParameter("sort") == null ? "time"
+				: (String) request.getParameter("sort");
 	%>
 	<table width="800px" border="1" align="center">
 		<tr>
-			<th><a class="link <%= sortType.equals("title") %>"
+			<th><a class="link <%=sortType.equals("title")%>"
 				href="/YDHCommunity/content/post_list.jsp?sort=title">제목</a></th>
-			<th><a class="link <%= sortType.equals("writer") %>"
+			<th><a class="link <%=sortType.equals("writer")%>"
 				href="/YDHCommunity/content/post_list.jsp?sort=writer">작성자</a></th>
-			<th><a class="link <%= sortType.equals("rec") %>"
+			<th><a class="link <%=sortType.equals("rec")%>"
 				href="/YDHCommunity/content/post_list.jsp?sort=rec">추천 수</a></th>
-			<th><a class="link <%= sortType.equals("time") %>" 
+			<th><a class="link <%=sortType.equals("time")%>"
 				href="/YDHCommunity/content/post_list.jsp?sort=time">작성 시각</a></th>
-		</tr> 
+		</tr>
 		<%
 			if (list != null) {
 				for (Post data : list) {
-					String time; 
+					String time;
 					try {
 						time = format.format(data.getWriteTime().getTime());
 					} catch (Exception e) {

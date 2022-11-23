@@ -1,0 +1,74 @@
+#content .post-write-box {
+	position: fixed;
+	text-align: center;
+	align-content: center;
+	vertical-align: middle;
+	justify-content: center;
+	text-align: center;  
+	height: 90%; 
+    align-items: center; 
+    display: flex; 
+}
+
+#content .post-write-box .info {
+	width: 50em;
+	position: fixed;
+	border-color: aqua;
+	border-radius: 2px;
+	justify-content: center;
+	display: flex;
+	text-align: center;
+	height: 90%;
+    align-items: center;
+    vertical-align: middle; 
+}
+
+#content .post-write-box .info form {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+body #content .post-write-box .info input.button{
+	font-size: 0.9em;
+}
+
+body #content .post-write-box .info input.button-danger{
+	font-size: 0.9em;
+	max-width: 3em;
+}
+
+
+body #content .post-write-box .info input{
+	border-width: 0px;
+	border-radius: 5px;
+	text-align: center; 
+	font-weight: lighter;
+	font-size: 0.9em;
+	margin-top: 7px;
+	margin-bottom: 10px;
+}
+body #content .post-write-box .info textarea{
+	border-width: 0px;
+	border-radius: 5px;
+	text-align: center; 
+	font-weight: lighter;
+	font-size: 0.9em;
+	margin-top: 7px;
+	margin-bottom: 10px; 
+}
+
+body #content .post-write-box .info input.end{
+	margin-bottom: 15px;
+}
+
+body #content .post-write-box .info input.title{
+	width: 45em;  
+}
+
+
+body #content .post-write-box .info textarea.content{
+	width: 45em; 
+	height: 25em;
+	text-align: left;
+	vertical-align: top;
+}

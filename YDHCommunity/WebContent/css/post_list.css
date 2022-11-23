@@ -1,8 +1,10 @@
 #content .post-list-box {
+	padding-top: 50px;
 	position: fixed;
 }
 
 #content .post-list-box th {
+	height: 30px;
 	text-align: center;
 	border-left: 0px;
 	border-top: 0px;

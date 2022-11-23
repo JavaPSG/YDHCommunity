@@ -15,29 +15,28 @@
 	String userE = (String) request.getParameter("user");
 %>
 <meta charset="UTF-8">
-<title>양디고 커뮤니티 - 게시물 작성
-</title>
+<title>양디고 커뮤니티 - 게시물 작성</title>
 <link rel="stylesheet" href="/YDHCommunity/css/style.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/font.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/header.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/menu.css" />
 <link rel="stylesheet" href="/YDHCommunity/css/post_write.css" />
 </head>
-<%@ include file="/header.jsp"%> 
+<%@ include file="/header.jsp"%>
 <div class="post-write-box">
 	<%
 		User data = userManager.getUser(request.getCookies());
-	%> 
+	%>
 	<div class="info">
 		<form action="/YDHCommunity/PostWrite" method="post" border="2"
 			align="center">
 			<tr>
 				<td>제목</td>
-				<td><input type="text" name="title"></td>
+				<td><input class="title" type="text" name="title"></td>
 			</tr>
 			<tr>
 				<td>내용</td>
-				<td><input type="text" name="content"></td>
+				<td><textarea class="content" name="content" cols="30" rows="5"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2"><input class="button" type="submit"

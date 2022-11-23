@@ -139,6 +139,23 @@ body.white-theme #content input{
 	background: #212121;
 } 
 
+body #content textarea{
+	transform: translateZ(0);
+	will-change: transform;
+	backface-visibility: hidden;
+	transition: background-color, color 0.5s ease-in-out;
+	-webkit-transition: background-color, color 0.5s ease-in-out;
+	-moz-transition: background-color, color 0.5s ease-in-out;
+	-o-transition: background-color, color 0.5s ease-in-out;
+	color: #1a1a1a;
+	background: #ebe8e8;
+}
+
+body.white-theme #content textarea{
+	color: #f7f7f7;
+	background: #212121;
+} 
+
 body #content input.button{
 	border-color: #1a1a1a;
 	background: #ebe8e8;
@@ -256,3 +273,4 @@ body #content .main-box input{
 	margin-top: 7px;
 	margin-bottom: 10px;
 }
+

@@ -10,6 +10,7 @@
 	UserDataManager userManager = UserDataManager.getInstance();
 	PostDataManager postManager = PostDataManager.getInstance();
 	userManager.init();  
+	postManager.init();
 	Theme theme = ThemeUtil.getTheme(request.getCookies());
 	String result = theme.getId().split("-")[1];
 %>
@@ -28,10 +29,10 @@
 								<ul>
 									<li><a href="/YDHCommunity/index.jsp"><span
 											id="menu-icon">&#xe88a</span> <span>메인 화면</span></a></li>
-									<li><a href="/YDHCommunity/content/post_list.jsp?sort=time"><span
-											id="menu-icon">&#xe241</span> <span>게시물 목록</span></a></li>
 									<li><a href="/YDHCommunity/content/user_list.jsp?sort=time"><span
 											id="menu-icon">&#xe7ef</span> <span>사용자 목록</span></a></li>
+									<li><a href="/YDHCommunity/content/post_list.jsp?sort=time"><span
+											id="menu-icon">&#xe241</span> <span>게시물 목록</span></a></li>
 									<%
 										String url = request.getRequestURI();
 										User user = userManager.getUser(request.getCookies());
@@ -44,6 +45,9 @@
 									<%
 										} else {
 									%> 
+									
+									<li><a href="/YDHCommunity/content/post_write.jsp"><span
+											id="menu-icon">&#xea20</span> <span>게시물 작성</span></a></li>
 									<li><a
 										href="/YDHCommunity/content/user_view.jsp?user=<%=user.getEmail()%>"><span
 											id="menu-icon">&#xe7fd</span> <span>프로필</span></a></li>

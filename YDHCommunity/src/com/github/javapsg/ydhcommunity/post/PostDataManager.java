@@ -20,17 +20,29 @@ import com.github.javapsg.ydhcommunity.utils.JDBCUtil;
 
 public class PostDataManager {
 
+	// 모든 게시물 데이터 맵
 	private final Map<UUID, Post> postMap = Collections.synchronizedMap(new HashMap<>());
 	private SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 
+	// 싱글톤: 내부 클래스 인스턴스
 	private static class InnerInstanceClazz {
 		private static final PostDataManager instance = new PostDataManager();
 	}
 
+	/***
+	 * 싱글톤 패턴을 이용한 여러 위치에서 같은 인스턴스를 사용하기 위한 메소드
+	 * 
+	 * @return 아 클래스의 싱글톤 인스턴스
+	 */
 	public static PostDataManager getInstance() {
 		return InnerInstanceClazz.instance;
 	}
 
+	/***
+	 * 중복되지 않은 UUID 발급
+	 * 
+	 * @return 랜덤 UUID
+	 */
 	private UUID createUUID() {
 		UUID uuid = UUID.randomUUID();
 		if (postMap.containsKey(uuid)) {
@@ -40,7 +52,14 @@ public class PostDataManager {
 		}
 	}
 
+	/***
+	 * 게시물 데이터가 비어있는 경우에 DB로부터 데이터를 받아와서 저장함
+	 */
 	public void init() {
+		if (!postMap.isEmpty()) {
+			return;
+		}
+		postMap.clear();
 		Connection conn = JDBCUtil.getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -63,19 +82,37 @@ public class PostDataManager {
 			JDBCUtil.close(conn, pstmt, rs);
 		}
 	}
-	
-	private Collection<String> getRecs(String str){
+
+	private Collection<String> getRecs(String str) {
 		if (str == null || (str != null && str.isEmpty())) {
 			return Arrays.asList();
 		}
 		return Arrays.asList(str.split(":"));
 	}
+
 	
-	public int insertPost(Post post) {
+	/***
+	 * DB와 맵에 게시물 데이터를 저장
+	 * 
+	 * @param post 게시물
+	 * @return SQL 문을 실행한 결과
+	 */
+	public UUID insertPost(Post post) {
+		UUID uuid = createUUID();
+		insertPost(post, uuid);
+		return uuid;
+	}
+
+	/***
+	 * DB와 맵에 게시물 데이터를 저장
+	 * 
+	 * @param post 게시물
+	 * @return SQL 문을 실행한 결과
+	 */
+	private int insertPost(Post post, UUID uuid) {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		UUID uuid = createUUID();
 		User user = UserDataManager.getInstance().getUser(post.getWriter());
 		String sql = "insert into post(writer, title, content, recommanders, write_time, uuid) values(?,?,?,?,?,?)";
 		try {
@@ -100,6 +137,12 @@ public class PostDataManager {
 		return result;
 	}
 
+	/***
+	 * DB와 맵에 기존 게시물 데이터를 갱신
+	 * 
+	 * @param post 게시물
+	 * @return SQL 문을 실행한 결과
+	 */
 	public int updatePost(Post post) {
 		int result = 0;
 		Connection conn = null;
